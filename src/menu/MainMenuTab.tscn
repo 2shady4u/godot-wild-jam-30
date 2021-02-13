@@ -1,0 +1,63 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/menu/MainMenuTab.gd" type="Script" id=1]
+
+[node name="MainMenuTab" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MC" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 24
+custom_constants/margin_top = 24
+custom_constants/margin_left = 24
+custom_constants/margin_bottom = 24
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VB" type="VBoxContainer" parent="MC"]
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 1000.0
+margin_bottom = 552.0
+custom_constants/separation = 36
+alignment = 1
+
+[node name="VB" type="VBoxContainer" parent="MC/VB"]
+margin_top = 208.0
+margin_right = 976.0
+margin_bottom = 264.0
+custom_constants/separation = 16
+alignment = 1
+
+[node name="StartButton" type="Button" parent="MC/VB/VB"]
+margin_left = 424.0
+margin_right = 552.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 128, 0 )
+size_flags_horizontal = 4
+text = "Start"
+
+[node name="SettingsButton" type="Button" parent="MC/VB/VB"]
+margin_left = 424.0
+margin_top = 36.0
+margin_right = 552.0
+margin_bottom = 56.0
+rect_min_size = Vector2( 128, 0 )
+size_flags_horizontal = 4
+text = "Settings"
+
+[node name="QuitButton" type="Button" parent="MC/VB"]
+margin_left = 424.0
+margin_top = 300.0
+margin_right = 552.0
+margin_bottom = 320.0
+rect_min_size = Vector2( 128, 0 )
+size_flags_horizontal = 4
+text = "Quit"

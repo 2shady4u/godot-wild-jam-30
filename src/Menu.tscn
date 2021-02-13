@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/Menu.gd" type="Script" id=1]
+[ext_resource path="res://src/menu/MenuTabContainer.gd" type="Script" id=2]
+[ext_resource path="res://src/menu/MainMenuTab.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/menu/SettingsMenuTab.tscn" type="PackedScene" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[node name="Menu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MenuTabContainer" type="TabContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 1 )
+tabs_visible = false
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainMenuTab" parent="MenuTabContainer" instance=ExtResource( 3 )]
+
+[node name="SettingsMenuTab" parent="MenuTabContainer" instance=ExtResource( 4 )]
+visible = false
+tab_type = 1
