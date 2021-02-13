@@ -32,7 +32,7 @@ _global_script_classes=[ {
 "base": "Control",
 "class": "MenuTab",
 "language": "GDScript",
-"path": "res://MenuTab.gd"
+"path": "res://src/menu/MenuTab.gd"
 }, {
 "base": "Control",
 "class": "PauseTab",
