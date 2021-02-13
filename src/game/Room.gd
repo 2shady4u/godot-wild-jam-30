@@ -4,6 +4,8 @@ extends Area2D
 onready var _heart_on := $HeartOn
 onready var _heart_off := $HeartOff
 
+export(float) var camera_zoom := 1.0
+
 signal player_entered_room
 
 func _ready():

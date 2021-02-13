@@ -12,7 +12,6 @@ func _ready() -> void:
 		_quit_button.visible = true
 		_error = _quit_button.connect("pressed", self, "_on_quit_button_pressed")
 
-func update_tab() -> void:
 	_menu_button.grab_focus()
 
 func _on_menu_button_pressed():

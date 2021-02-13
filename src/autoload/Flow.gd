@@ -5,7 +5,7 @@ enum STATE {MENU, INTRO, GAME, OUTRO, DEFEAT}
 var _state_dict := {
 	"menu": {
 		"packed_scene": preload("res://src/Menu.tscn"),
-		"state": STATE.MENU
+		"state": STATE.MENU,
 		},
 	"intro": {
 		"packed_scene": preload("res://src/Intro.tscn"),
@@ -13,7 +13,8 @@ var _state_dict := {
 		},
 	"game": {
 		"packed_scene": preload("res://src/Game.tscn"),
-		"state": STATE.GAME
+		"state": STATE.GAME,
+		"mouse_mode": Input.MOUSE_MODE_HIDDEN
 		},
 	"outro": {
 		"packed_scene": preload("res://src/Outro.tscn"),
@@ -44,9 +45,11 @@ func change_scene_to(key : String) -> void:
 	if _state_dict.has(key):
 		var state_settings : Dictionary = _state_dict[key]
 		var packed_scene : PackedScene = state_settings.packed_scene
+		var mouse_mode : int = state_settings.get("mouse_mode", Input.MOUSE_MODE_VISIBLE)
 		_flow_state = state_settings.state
 
 		var error := get_tree().change_scene_to(packed_scene)
+		Input.set_mouse_mode(mouse_mode)
 		get_tree().paused = false
 		if error != OK:
 			push_error("Failed to change scene to '{0}'.".format([key]))

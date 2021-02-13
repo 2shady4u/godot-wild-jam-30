@@ -1,15 +1,13 @@
 class_name Player
 extends KinematicBody2D
 
-const MAX_HEALTH := 3
-
-var health := MAX_HEALTH;
+var health := Globals.MAX_HEALTH;
 var heart_activated := false
 
 signal heart_toggled
 
 func _ready():
-	pass # Replace with function body.
+	var _error := State.connect("player_health_changed", self, "_on_player_health_changed")
 
 func _physics_process(_delta):
 	var move_direction := Vector2.ZERO
@@ -31,9 +29,19 @@ func _input(event):
 	if event.is_action_pressed("toggle_heart"):
 		heart_activated = not heart_activated
 		update_player()
+	if event.is_action_pressed("attack"):
+		print("ATTACK!")
+
+	if event.is_action_pressed("increase_health"):
+		State.player_health += 1
+	elif event.is_action_pressed("decrease_health"):
+		State.player_health -= 1
+
+func _on_player_health_changed():
+	pass
 
 func update_player():
-	print("updating..." + str(heart_activated))
+	print("updating player..." + str(heart_activated))
 	set_collision_layer_bit(1, heart_activated)
 	set_collision_layer_bit(2, not heart_activated)
 

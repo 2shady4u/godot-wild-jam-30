@@ -16,3 +16,4 @@ func _ready():
 func _on_player_entered_room(room : Room) -> void:
 	active_room = room
 	_camera_2d.global_position = active_room.global_position
+	_camera_2d.zoom = active_room.camera_zoom*Vector2.ONE
