@@ -1,13 +1,19 @@
 class_name Player
 extends KinematicBody2D
 
-var health := Globals.MAX_HEALTH;
+onready var _interact_area := $InteractArea
+
 var heart_activated := false
 
 signal heart_toggled
 
 func _ready():
 	var _error := State.connect("player_health_changed", self, "_on_player_health_changed")
+	_error = _interact_area.connect("area_entered", self, "_on_area_entered")
+
+func _on_area_entered(area : Area2D) -> void:
+	if area is Pickup:
+		area.emit_signal("picked_up")
 
 func _physics_process(_delta):
 	var move_direction := Vector2.ZERO

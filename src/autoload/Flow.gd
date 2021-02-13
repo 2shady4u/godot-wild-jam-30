@@ -57,3 +57,21 @@ func change_scene_to(key : String) -> void:
 			print("Succesfully changed scene to '{0}'.".format([key]))
 	else:
 		push_error("Requested scene '{0}' was not recognized... ignoring call for changing scene.".format([key]))
+
+func pick_up_pickup(pickup_id) -> void:
+	var pickup_dict : Dictionary = Globals.PICKUPS_DICT.get(pickup_id, {})
+	# Try to add an item to the inventory!
+	var item_id : String = pickup_dict.get("item_id", "")
+	if not item_id.empty():
+		State.increase_item_amount(item_id)
+
+	# Do other stuff here!
+	var actions : Array = pickup_dict.get("actions", [])
+	for key in actions:
+		if key in bindings.keys():
+			var binding : FuncRef = bindings[key]
+			binding.call_func()
+
+var bindings := {
+	"increase_health": funcref(State, "increase_player_health")
+}
