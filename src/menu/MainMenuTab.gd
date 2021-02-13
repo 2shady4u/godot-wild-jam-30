@@ -21,7 +21,7 @@ func update_tab():
 
 func _on_start_button_pressed():
 	#var _error := State.load_stateJSON(Flow.DEFAULT_CONTEXT_PATH)
-	Flow.change_scene_to("game")
+	Flow.change_scene_to("intro")
 
 func _on_settings_button_pressed():
 	emit_signal("button_pressed", TABS.SETTINGS)

@@ -25,4 +25,3 @@ __meta__ = {
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PauseUI" parent="CanvasLayer" instance=ExtResource( 2 )]
-visible = false

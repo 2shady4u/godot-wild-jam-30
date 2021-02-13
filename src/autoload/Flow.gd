@@ -7,9 +7,21 @@ var _state_dict := {
 		"packed_scene": preload("res://src/Menu.tscn"),
 		"state": STATE.MENU
 		},
+	"intro": {
+		"packed_scene": preload("res://src/Intro.tscn"),
+		"state": STATE.INTRO
+		},
 	"game": {
 		"packed_scene": preload("res://src/Game.tscn"),
 		"state": STATE.GAME
+		},
+	"outro": {
+		"packed_scene": preload("res://src/Outro.tscn"),
+		"state": STATE.OUTRO
+		},
+	"defeat": {
+		"packed_scene": preload("res://src/Defeat.tscn"),
+		"state": STATE.DEFEAT
 		},
 	}
 var _flow_state : int = STATE.MENU
