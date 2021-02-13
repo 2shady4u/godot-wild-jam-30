@@ -14,8 +14,15 @@ var _state_dict := {
 	}
 var _flow_state : int = STATE.MENU
 
+signal pause_toggled
+
 func _ready():
 	pass # Replace with function body.
+
+func _unhandled_input(event : InputEvent):
+	if _flow_state == STATE.GAME:
+		if event.is_action_pressed("toggle_paused"):
+			emit_signal("pause_toggled")
 
 func deferred_quit() -> void:
 ## Quit the game during an idle frame.

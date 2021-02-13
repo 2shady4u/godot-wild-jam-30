@@ -1,14 +1,13 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://src/menu/SettingsMenuTab.gd" type="Script" id=1]
+[ext_resource path="res://src/game/UI/pause/SettingsPauseTab.gd" type="Script" id=1]
 
-[node name="SettingsMenuTab" type="Control"]
+[node name="SettingsPauseTab" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
 __meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 tab_type = 1
 
@@ -28,7 +27,6 @@ margin_left = 448.0
 margin_top = 24.0
 margin_right = 576.0
 margin_bottom = 552.0
-rect_min_size = Vector2( 128, 0 )
 size_flags_horizontal = 4
 alignment = 1
 
@@ -36,4 +34,6 @@ alignment = 1
 margin_top = 254.0
 margin_right = 128.0
 margin_bottom = 274.0
+rect_min_size = Vector2( 128, 0 )
+size_flags_horizontal = 4
 text = "Back"

@@ -1,8 +1,8 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://src/menu/MainMenuTab.gd" type="Script" id=1]
+[ext_resource path="res://src/game/UI/pause/MainPauseTab.gd" type="Script" id=1]
 
-[node name="MainMenuTab" type="Control"]
+[node name="MainPauseTab" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
@@ -27,38 +27,45 @@ margin_left = 24.0
 margin_top = 24.0
 margin_right = 1000.0
 margin_bottom = 552.0
-custom_constants/separation = 36
 alignment = 1
 
 [node name="VB" type="VBoxContainer" parent="MC/VB"]
 margin_top = 208.0
 margin_right = 976.0
-margin_bottom = 264.0
+margin_bottom = 320.0
 custom_constants/separation = 16
 alignment = 1
 
-[node name="StartButton" type="Button" parent="MC/VB/VB"]
+[node name="SettingsButton" type="Button" parent="MC/VB/VB"]
 margin_left = 424.0
 margin_right = 552.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 128, 0 )
 size_flags_horizontal = 4
-text = "Start"
-
-[node name="SettingsButton" type="Button" parent="MC/VB/VB"]
-margin_left = 424.0
-margin_top = 36.0
-margin_right = 552.0
-margin_bottom = 56.0
-rect_min_size = Vector2( 128, 0 )
-size_flags_horizontal = 4
 text = "Settings"
 
-[node name="QuitButton" type="Button" parent="MC/VB"]
+[node name="HSeparator" type="HSeparator" parent="MC/VB/VB"]
+margin_left = 360.0
+margin_top = 36.0
+margin_right = 616.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 256, 0 )
+size_flags_horizontal = 4
+
+[node name="MenuButton" type="Button" parent="MC/VB/VB"]
 margin_left = 424.0
-margin_top = 300.0
+margin_top = 56.0
 margin_right = 552.0
-margin_bottom = 320.0
+margin_bottom = 76.0
 rect_min_size = Vector2( 128, 0 )
 size_flags_horizontal = 4
-text = "Quit"
+text = "Quit to Menu"
+
+[node name="QuitButton" type="Button" parent="MC/VB/VB"]
+margin_left = 424.0
+margin_top = 92.0
+margin_right = 552.0
+margin_bottom = 112.0
+rect_min_size = Vector2( 128, 0 )
+size_flags_horizontal = 4
+text = "Quit Game"

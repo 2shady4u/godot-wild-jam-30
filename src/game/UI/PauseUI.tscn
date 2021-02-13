@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/game/UI/PauseUI.gd" type="Script" id=1]
+[ext_resource path="res://src/game/UI/pause/PauseTabContainer.gd" type="Script" id=2]
+[ext_resource path="res://src/game/UI/pause/MainPauseTab.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/game/UI/pause/SettingsPauseTab.tscn" type="PackedScene" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[node name="PauseUI" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="PauseTabContainer" type="TabContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 1 )
+tabs_visible = false
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainPauseTab" parent="PauseTabContainer" instance=ExtResource( 3 )]
+
+[node name="SettingsPauseTab" parent="PauseTabContainer" instance=ExtResource( 4 )]
+visible = false

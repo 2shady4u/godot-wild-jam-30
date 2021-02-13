@@ -12,6 +12,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -29,4 +30,3 @@ __meta__ = {
 
 [node name="SettingsMenuTab" parent="MenuTabContainer" instance=ExtResource( 4 )]
 visible = false
-tab_type = 1
