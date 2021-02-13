@@ -11,7 +11,6 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-texture = ExtResource( 1 )
 amount = 122
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -21,6 +20,9 @@ rect_min_size = Vector2( 36, 32 )
 texture = ExtResource( 1 )
 expand = true
 stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label" type="Label" parent="."]
 margin_left = 44.0

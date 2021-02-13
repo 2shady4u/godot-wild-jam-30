@@ -1,11 +1,9 @@
 tool
 extends HBoxContainer
 
-export(String) var id := ""
-
-export(Texture) var texture := load("res://icon.png") setget set_texture
-func set_texture(value : Texture) -> void:
-	texture = value
+export(String) var id := "" setget set_id
+func set_id(value : String) -> void:
+	id = value
 	if is_inside_tree():
 		update_item_hbox()
 
@@ -20,4 +18,8 @@ func _ready():
 
 func update_item_hbox():
 	$AmountLabel.text = str(amount)
+
+	var item_settings : Dictionary = GLOBALS.ITEMS_DICT.get(id, {})
+
+	var texture : Texture = item_settings.get("texture", preload("res://icon.png"))
 	$TextureRect.texture = texture

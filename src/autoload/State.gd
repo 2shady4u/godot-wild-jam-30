@@ -3,9 +3,9 @@ extends Node
 signal player_health_changed
 signal item_amount_changed
 
-var player_health := Globals.MAX_HEALTH setget set_player_health
+var player_health := GLOBALS.MAX_PLAYER_HEALTH setget set_player_health
 func set_player_health(value : int) -> void:
-	player_health = int(clamp(value, 0, Globals.MAX_HEALTH))
+	player_health = int(clamp(value, 0, GLOBALS.MAX_PLAYER_HEALTH))
 	if player_health == 0:
 		Flow.change_scene_to("defeat")
 	else:
@@ -14,11 +14,11 @@ func set_player_health(value : int) -> void:
 var inventory := {}
 
 func reset():
-	player_health = Globals.MAX_HEALTH
+	player_health = GLOBALS.MAX_PLAYER_HEALTH
 
 	inventory.clear()
-	for key in Globals.ITEMS_DICT.keys():
-		var value : Dictionary = Globals.ITEMS_DICT[key]
+	for key in GLOBALS.ITEMS_DICT.keys():
+		var value : Dictionary = GLOBALS.ITEMS_DICT[key]
 		inventory[key] = value.get("initial_amount", 0)
 
 func increase_player_health():

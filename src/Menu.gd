@@ -1,12 +1,7 @@
+# The game's main menu...
 extends Control
 
+onready var _menu_tab_container := $MenuTabContainer
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
+	_menu_tab_container.set_current_tab(MenuTab.TABS.MAIN)

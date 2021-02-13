@@ -3,8 +3,8 @@ extends Control
 const SCENE_HEALTH_RECT := preload("res://src/game/UI/game_overlay/HealthRect.tscn")
 const SCENE_ITEM_HBOX := preload("res://src/game/UI/game_overlay/ItemHBox.tscn")
 
-onready var _health_hbox := $HB/Control/MC/HealthHBox
-onready var _inventory_vbox := $HB/Control/MC/InventoryVBox
+onready var _health_hbox := $HB/Control/MC/HB/HealthHBox
+onready var _inventory_vbox := $HB/Control/InventoryMC/VB
 
 func _ready():
 	var _error := State.connect("player_health_changed", self, "_on_player_health_changed")
@@ -14,7 +14,7 @@ func _ready():
 		_health_hbox.remove_child(child)
 		child.queue_free()
 
-	for _i in range(Globals.MAX_HEALTH):
+	for _i in range(Globals.MAX_PLAYER_HEALTH):
 		var health_rect := SCENE_HEALTH_RECT.instance()
 		_health_hbox.add_child(health_rect)
 
@@ -23,8 +23,9 @@ func _ready():
 		child.queue_free()
 
 	# Add all the items!
-	for key in Globals.ITEMS_DICT.keys():
+	for key in GLOBALS.ITEMS_DICT.keys():
 		var item_hbox := SCENE_ITEM_HBOX.instance()
+		var value : Dictionary = GLOBALS.ITEMS_DICT[key]
 		item_hbox.id = key
 
 		_inventory_vbox.add_child(item_hbox)

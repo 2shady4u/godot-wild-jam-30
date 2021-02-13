@@ -4,11 +4,9 @@ extends Area2D
 
 onready var _sprite := $Sprite
 
-export(String) var id := ""
-
-export(Texture) var texture := load("res://icon.png") setget set_texture
-func set_texture(value : Texture) -> void:
-	texture = value
+export(String) var id := "" setget set_id
+func set_id(value : String) -> void:
+	id = value
 	if is_inside_tree():
 		update_pickup()
 
@@ -19,4 +17,7 @@ func _ready():
 	update_pickup()
 
 func update_pickup():
+	var pickup_settings : Dictionary = GLOBALS.PICKUPS_DICT.get(id, {})
+
+	var texture : Texture = pickup_settings.get("texture", preload("res://icon.png"))
 	$Sprite.texture = texture
