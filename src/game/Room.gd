@@ -1,6 +1,18 @@
 class_name Room
-extends Node2D
+extends Area2D
 
-# Called when the node enters the scene tree for the first time.
+onready var _heart_on := $HeartOn
+onready var _heart_off := $HeartOff
+
+signal player_entered_room
+
 func _ready():
-	pass # Replace with function body.
+	var _error : int = connect("body_entered", self, "_on_body_entered")
+
+func _on_body_entered(body : PhysicsBody2D) -> void:
+	if body is Player:
+		emit_signal("player_entered_room")
+
+func _on_heart_toggled(activated : bool) -> void:
+	_heart_on.visible = activated
+	_heart_off.visible = not activated
