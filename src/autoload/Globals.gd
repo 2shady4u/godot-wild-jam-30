@@ -12,7 +12,7 @@ const ITEMS_DICT := {
 	},
 	"boss_key": {
 		"initial_amount": 1,
-		"texture": preload('res://resources/boss_key_atlastexture.tres'),
+		"texture": preload('res://resources/boss_key_atlastexture.tres')
 	}
 }
 
@@ -22,8 +22,10 @@ const PICKUPS_DICT := {
 		"item_id": "key"
 	},
 	"boss_key": {
-		"texture": preload('res://resources/boss_key_atlastexture.tres'),
-		"item_id": "boss_key"
+		"texture": preload('res://resources/boss_key_atlastexture_multi.tres'),
+		"item_id": "boss_key",
+		"hframes": 2,
+		"animation": preload("res://resources/boss_key_anim.tres")
 	},
 	"bandage": {
 		"texture": preload('res://resources/bandage_atlastexture.tres'),
