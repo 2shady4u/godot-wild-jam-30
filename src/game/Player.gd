@@ -31,7 +31,7 @@ func _on_interact_area_entered(area : Area2D) -> void:
 func _on_interact_body_entered(body : PhysicsBody2D) -> void:
 	if body is Door:
 		if not body in _overlapping_stack:
-			if (body as Door).type == Door.TYPE.LOCKED:
+			if (body as Door).type == GLOBALS.DOOR_TYPE.LOCKED:
 				_overlapping_stack.append(body)
 				update_overlapping_body()
 	elif body is Lever:
