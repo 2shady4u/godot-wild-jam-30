@@ -7,7 +7,7 @@ onready var _player := $Player
 func _ready():
 	for child in _rooms.get_children():
 		var _error : int = child.connect("player_entered_room", self, "_on_player_entered_room", [child])
-		_error = _player.connect("heart_toggled", child, "_on_heart_toggled")
+		_error = _player.connect("dimension_changed", child, "_on_dimension_changed")
 
 		child.player = _player
 

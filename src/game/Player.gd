@@ -3,13 +3,12 @@ extends KinematicBody2D
 
 onready var _interact_area := $InteractArea
 
-var heart_activated := false
 var active_room : Node2D
 
 var _overlapping_stack := []
 var _overlapping_body : PhysicsBody2D
 
-signal heart_toggled
+signal dimension_changed
 
 func _ready():
 	var _error := State.connect("player_health_changed", self, "_on_player_health_changed")
@@ -88,7 +87,11 @@ func _physics_process(_delta):
 
 func _input(event):
 	if event.is_action_pressed("toggle_heart"):
-		heart_activated = not heart_activated
+		match State.dimension:
+			GLOBALS.DIMENSION.WITCH_CASTLE:
+				State.dimension = GLOBALS.DIMENSION.EMERALD_CITY
+			GLOBALS.DIMENSION.EMERALD_CITY:
+				State.dimension = GLOBALS.DIMENSION.WITCH_CASTLE
 		update_player()
 
 	if event.is_action_pressed("attack"):
@@ -112,11 +115,18 @@ func _on_player_health_changed():
 	pass
 
 func update_player():
-	print("updating player..." + str(heart_activated))
-	set_collision_layer_bit(1, heart_activated)
-	set_collision_layer_bit(2, not heart_activated)
+	match State.dimension:
+		GLOBALS.DIMENSION.WITCH_CASTLE:
+			set_collision_layer_bit(1, false)
+			set_collision_layer_bit(2, true)
 
-	set_collision_mask_bit(1, heart_activated)
-	set_collision_mask_bit(2, not heart_activated)
+			set_collision_mask_bit(1, false)
+			set_collision_mask_bit(2, true)
+		GLOBALS.DIMENSION.EMERALD_CITY:
+			set_collision_layer_bit(1, true)
+			set_collision_layer_bit(2, false)
 
-	emit_signal("heart_toggled", heart_activated)
+			set_collision_mask_bit(1, true)
+			set_collision_mask_bit(2, false)
+
+	emit_signal("dimension_changed")

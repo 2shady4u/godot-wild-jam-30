@@ -12,6 +12,7 @@ func set_player_health(value : int) -> void:
 		emit_signal("player_health_changed")
 
 var inventory := {}
+var dimension : int = GLOBALS.DIMENSION.WITCH_CASTLE
 
 func reset():
 	player_health = GLOBALS.MAX_PLAYER_HEALTH

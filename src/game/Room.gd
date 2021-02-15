@@ -10,6 +10,7 @@ onready var _pickups := $Pickups
 onready var _doors := $Doors
 onready var _enemies := $Enemies
 onready var _levers := $Levers
+onready var _pressure_plates := $PressurePlates
 
 onready var _navigation_2d := $Navigation2D
 
@@ -41,14 +42,23 @@ func _on_body_entered(body : PhysicsBody2D) -> void:
 	if body is Player:
 		emit_signal("player_entered_room")
 
-func _on_heart_toggled(activated : bool) -> void:
-	_heart_on.visible = activated
-	_heart_off.visible = not activated
+func _on_dimension_changed() -> void:
+	match State.dimension:
+		GLOBALS.DIMENSION.WITCH_CASTLE:
+			_heart_on.visible = false
+			_heart_off.visible = true
+			active_tilemap = _heart_off
+		GLOBALS.DIMENSION.EMERALD_CITY:
+			_heart_on.visible = true
+			_heart_off.visible = false
+			active_tilemap = _heart_on
 
-	if activated:
-		active_tilemap = _heart_on
-	else:
-		active_tilemap = _heart_off
+	for child in _doors.get_children():
+		(child as Door).dimension = State.dimension
+	for child in _levers.get_children():
+		(child as Lever).dimension = State.dimension
+	for child in _pressure_plates.get_children():
+		(child as PressurePlate).dimension = State.dimension
 
 func get_cell(player_position : Vector2) -> int:
 	if active_tilemap:

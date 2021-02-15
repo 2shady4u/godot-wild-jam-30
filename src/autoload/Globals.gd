@@ -1,10 +1,15 @@
 class_name GLOBALS
 extends Node
 
+enum DIRECTION {TOP, BOTTOM, LEFT, RIGHT}
+enum DOOR_TYPE {LOCKED, BOSS, ROOM_COMPLETION}
+enum DIMENSION {EMERALD_CITY, WITCH_CASTLE}
+
 const MONKEY_MOVE_SPEED := 40
 
 const MAX_MONKEY_HEALTH := 2
 const MAX_PLAYER_HEALTH := 3
+
 const ITEMS_DICT := {
 	"key": {
 		"initial_amount": 1,
@@ -38,27 +43,66 @@ const PICKUPS_DICT := {
 }
 
 const LEVERS_DICT := {
-	true: {
-		"texture": preload('res://resources/lever_on_atlastexture.tres'),
+	DIMENSION.EMERALD_CITY: {
+		true: {
+			"texture": preload('res://resources/lever_on_emerald_city_atlastexture.tres'),
+		},
+		false: {
+			"texture": preload('res://resources/lever_off_emerald_city_atlastexture.tres'),
+		}
 	},
-	false: {
-		"texture": preload('res://resources/lever_off_atlastexture.tres'),
+	DIMENSION.WITCH_CASTLE: {
+		true: {
+			"texture": preload('res://resources/lever_on_witch_castle_atlastexture.tres'),
+		},
+		false: {
+			"texture": preload('res://resources/lever_off_witch_castle_atlastexture.tres'),
+		}
 	}
 }
 
-enum DIRECTION {TOP, BOTTOM, LEFT, RIGHT}
-enum DOOR_TYPE {LOCKED, BOSS, ROOM_COMPLETION}
+const PRESSURE_PLATES_DICT := {
+	DIMENSION.EMERALD_CITY: {
+		true: {
+			"texture": preload('res://resources/pressure_plate_down_emerald_city_atlastexture.tres'),
+		},
+		false: {
+			"texture": preload('res://resources/pressure_plate_up_emerald_city_atlastexture.tres'),
+		}
+	},
+	DIMENSION.WITCH_CASTLE: {
+		true: {
+			"texture": preload('res://resources/pressure_plate_down_witch_castle_atlastexture.tres'),
+		},
+		false: {
+			"texture": preload('res://resources/pressure_plate_up_witch_castle_atlastexture.tres'),
+		}
+	},
+}
 
 const DOORS_DICT := {
-	DOOR_TYPE.LOCKED: {
-		"texture": preload('res://resources/door_locked_emerald_city_atlastexture.tres'),
+	DIMENSION.EMERALD_CITY: {
+		DOOR_TYPE.LOCKED: {
+			"texture": preload('res://resources/door_locked_emerald_city_atlastexture.tres'),
+		},
+		DOOR_TYPE.BOSS: {
+			"texture": preload('res://resources/door_locked_emerald_city_atlastexture.tres'),
+		},
+		DOOR_TYPE.ROOM_COMPLETION: {
+			"texture": preload('res://resources/door_room_completion_emerald_city_atlastexture.tres'),
+		}
 	},
-	DOOR_TYPE.BOSS: {
-		"texture": preload('res://resources/lever_on_atlastexture.tres'),
-	},
-	DOOR_TYPE.ROOM_COMPLETION: {
-		"texture": preload('res://resources/door_room_completion_emerald_city_atlastexture.tres'),
-	},
+	DIMENSION.WITCH_CASTLE: {
+		DOOR_TYPE.LOCKED: {
+			"texture": preload('res://resources/door_locked_witch_castle_atlastexture.tres'),
+		},
+		DOOR_TYPE.BOSS: {
+			"texture": preload('res://resources/door_locked_witch_castle_atlastexture.tres'),
+		},
+		DOOR_TYPE.ROOM_COMPLETION: {
+			"texture": preload('res://resources/door_room_completion_witch_castle_atlastexture.tres'),
+		}
+	}
 }
 
 const ROOMS_DICT := {
