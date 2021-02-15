@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/game/Room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/game/Door.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/game/Lever.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/game/PressurePlate.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/game/PushableObject.tscn" type="PackedScene" id=5]
 
 [node name="Start" instance=ExtResource( 1 )]
 id = "start"
@@ -29,5 +30,8 @@ position = Vector2( 192, 0 )
 [node name="PressurePlate" parent="PressurePlates" index="0" instance=ExtResource( 4 )]
 position = Vector2( -128, 128 )
 
-[node name="CollisionShape2D" parent="." index="7"]
+[node name="PushableObject" parent="PushableObjects" index="0" instance=ExtResource( 5 )]
+position = Vector2( 64, 120 )
+
+[node name="CollisionShape2D" parent="." index="8"]
 visible = false

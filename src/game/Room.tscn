@@ -144,6 +144,11 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="PushableObjects" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 5 )
 __meta__ = {

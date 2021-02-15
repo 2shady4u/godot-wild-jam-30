@@ -80,6 +80,15 @@ const PRESSURE_PLATES_DICT := {
 	},
 }
 
+const PUSHABLE_OBJECTS_DICT := {
+	DIMENSION.EMERALD_CITY: {
+	"texture": preload('res://resources/pushable_object_emerald_city_atlastexture.tres'),
+	},
+	DIMENSION.WITCH_CASTLE: {
+	"texture": preload('res://resources/pushable_object_witch_castle_atlastexture.tres')
+	}
+}
+
 const DOORS_DICT := {
 	DIMENSION.EMERALD_CITY: {
 		DOOR_TYPE.LOCKED: {

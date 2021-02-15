@@ -26,13 +26,13 @@ func _ready():
 	update_pressed()
 
 func _on_body_entered(body : PhysicsBody2D) -> void:
-	if body is Player:
+	if body is Player or body is PushableObject:
 		if not body in _overlapping_stack:
 			_overlapping_stack.append(body)
 			update_pressed()
 
 func _on_body_exited(body : PhysicsBody2D) -> void:
-	if body is Player:
+	if body is Player or body is PushableObject:
 		if body in _overlapping_stack:
 			_overlapping_stack.erase(body)
 			update_pressed()

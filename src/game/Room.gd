@@ -11,6 +11,7 @@ onready var _doors := $Doors
 onready var _enemies := $Enemies
 onready var _levers := $Levers
 onready var _pressure_plates := $PressurePlates
+onready var _pushable_objects := $PushableObjects
 
 onready var _navigation_2d := $Navigation2D
 
@@ -59,6 +60,8 @@ func _on_dimension_changed() -> void:
 		(child as Lever).dimension = State.dimension
 	for child in _pressure_plates.get_children():
 		(child as PressurePlate).dimension = State.dimension
+	for child in _pushable_objects.get_children():
+		(child as PushableObject).dimension = State.dimension
 
 func get_cell(player_position : Vector2) -> int:
 	if active_tilemap:
