@@ -25,7 +25,6 @@ func _ready():
 	# Add all the items!
 	for key in GLOBALS.ITEMS_DICT.keys():
 		var item_hbox := SCENE_ITEM_HBOX.instance()
-		var value : Dictionary = GLOBALS.ITEMS_DICT[key]
 		item_hbox.id = key
 
 		_inventory_vbox.add_child(item_hbox)

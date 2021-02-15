@@ -27,8 +27,8 @@ const PICKUPS_DICT := {
 		"hframes": 2,
 		"animation": preload("res://resources/boss_key_anim.tres")
 	},
-	"bandage": {
-		"texture": preload('res://resources/bandage_atlastexture.tres'),
+	"oil_can": {
+		"texture": preload('res://resources/oil_can_atlastexture.tres'),
 		"actions": ["increase_health"]
 	},
 	"heart": {
@@ -37,23 +37,48 @@ const PICKUPS_DICT := {
 	}
 }
 
+const LEVERS_DICT := {
+	true: {
+		"texture": preload('res://resources/lever_on_atlastexture.tres'),
+	},
+	false: {
+		"texture": preload('res://resources/lever_off_atlastexture.tres'),
+	}
+}
+
+enum DIRECTION {TOP, BOTTOM, LEFT, RIGHT}
+enum DOOR_TYPE {LOCKED, BOSS, ROOM_COMPLETION}
+
+const DOORS_DICT := {
+	DOOR_TYPE.LOCKED: {
+		"texture": preload('res://resources/door_locked_emerald_city_atlastexture.tres'),
+	},
+	DOOR_TYPE.BOSS: {
+		"texture": preload('res://resources/lever_on_atlastexture.tres'),
+	},
+	DOOR_TYPE.ROOM_COMPLETION: {
+		"texture": preload('res://resources/door_room_completion_emerald_city_atlastexture.tres'),
+	},
+}
+
 const ROOMS_DICT := {
 	"start": {
-		"on_completion": [{
+		"condition": "all_levers_on",
+		"rewards": [{
 			"action": "spawn_pickup",
-			"args": ["bandage"]
+			"args": ["oil_can"]
 		}]
 	},
 	"first_battle": {
-		"on_completion": [{
+		"rewards": [{
 			"action": "spawn_pickup",
-			"args": ["bandage"]
+			"args": ["oil_can"]
 		}]
 	},
 	"acquire_heart": {
-		"on_completion": [{
+		"rewards": [{
 			"action": "spawn_pickup",
-			"args": ["bandage"]
+			"args": ["oil_can"]
 		}]
 	}
 }

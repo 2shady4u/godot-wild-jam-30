@@ -6,12 +6,16 @@ onready var _interact_area := $InteractArea
 var heart_activated := false
 var active_room : Node2D
 
+var _overlapping_stack := []
+var _overlapping_body : PhysicsBody2D
+
 signal heart_toggled
 
 func _ready():
 	var _error := State.connect("player_health_changed", self, "_on_player_health_changed")
 	_error = _interact_area.connect("area_entered", self, "_on_interact_area_entered")
 	_error = _interact_area.connect("body_entered", self, "_on_interact_body_entered")
+	_error = _interact_area.connect("body_exited", self, "_on_interact_body_exited")
 
 	set_physics_process(true)
 	set_process_input(true)
@@ -27,12 +31,33 @@ func _on_interact_area_entered(area : Area2D) -> void:
 
 func _on_interact_body_entered(body : PhysicsBody2D) -> void:
 	if body is Door:
-		if (body as Door).type == Door.TYPE.LOCKED:
-			if State.get_item_amount("key") > 0:
-				State.decrease_item_amount("key")
-				body.emit_signal("opened")
+		if not body in _overlapping_stack:
+			if (body as Door).type == Door.TYPE.LOCKED:
+				_overlapping_stack.append(body)
+				update_overlapping_body()
 	elif body is Lever:
-		print("lever!!!")
+		if not body in _overlapping_stack:
+			_overlapping_stack.append(body)
+			update_overlapping_body()
+
+func _on_interact_body_exited(body : PhysicsBody2D) -> void:
+	if body in _overlapping_stack:
+		_overlapping_stack.erase(body)
+		update_overlapping_body()
+
+func update_overlapping_body():
+	_overlapping_stack.sort_custom(self, "sort_overlapping_stack")
+	if _overlapping_stack.empty():
+		_overlapping_body = null
+	else:
+		_overlapping_body = _overlapping_stack.front()
+
+func sort_overlapping_stack(a : PhysicsBody2D, b : PhysicsBody2D):
+	var a_distance : float = a.global_position.distance_to(global_position)
+	var b_distance : float = b.global_position.distance_to(global_position)
+	if a_distance > b_distance:
+		return true
+	return false
 
 func _physics_process(_delta):
 	var move_direction := Vector2.ZERO
@@ -54,7 +79,7 @@ func _physics_process(_delta):
 		var tile_index : int = active_room.get_cell(global_position)
 		#print(tile_index)
 		match tile_index:
-			3:
+			0:
 				print("PLAYER FELL IN HOLE!")
 				set_physics_process(false)
 				set_process_input(true)
@@ -65,8 +90,18 @@ func _input(event):
 	if event.is_action_pressed("toggle_heart"):
 		heart_activated = not heart_activated
 		update_player()
+
 	if event.is_action_pressed("attack"):
 		print("ATTACK!")
+
+	if event.is_action_pressed("interact"):
+		if _overlapping_body != null:
+			if _overlapping_body is Door:
+				if State.get_item_amount("key") > 0:
+					State.decrease_item_amount("key")
+					_overlapping_body.open()
+			elif _overlapping_body is Lever:
+				_overlapping_body.toggle()
 
 	if event.is_action_pressed("increase_health"):
 		State.player_health += 1
