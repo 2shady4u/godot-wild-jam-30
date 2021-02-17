@@ -20,12 +20,15 @@ func set_type(value : int) -> void:
 	if is_inside_tree():
 		update_door()
 
+var _stream := preload("res://audio/sfx/door_open.ogg")
+
 signal opened
 
 func _ready() -> void:
 	update_door()
 
 func open():
+	AudioEngine.play_effect(_stream)
 	emit_signal("opened")
 
 func update_door() -> void:

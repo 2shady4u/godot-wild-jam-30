@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/oil_can.ogg-da22f947531677e0139a6e94e5fcfeca.oggstr"
+
+[deps]
+
+source_file="res://audio/sfx/pickups/oil_can.ogg"
+dest_files=[ "res://.import/oil_can.ogg-da22f947531677e0139a6e94e5fcfeca.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

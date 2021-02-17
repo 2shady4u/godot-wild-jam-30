@@ -16,6 +16,8 @@ func set_active(value : bool) -> void:
 
 var locked := false
 
+var _stream := preload("res://audio/sfx/lever_toggle.ogg")
+
 signal toggled
 
 func _ready():
@@ -26,6 +28,7 @@ func toggle():
 		active = not active
 		update_lever()
 
+		AudioEngine.play_effect(_stream)
 		emit_signal("toggled")
 
 func update_lever():
@@ -34,3 +37,6 @@ func update_lever():
 
 	var texture : Texture = lever_settings.get("texture", preload("res://icon.png"))
 	$Sprite.texture = texture
+
+	var offset : Vector2 = lever_settings.get("offset", Vector2.ZERO)
+	$Sprite.offset = offset

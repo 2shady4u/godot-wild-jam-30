@@ -4,15 +4,16 @@
 [ext_resource path="res://resources/lever_off_witch_castle_atlastexture.tres" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 16, 16 )
+extents = Vector2( 16, 8 )
 
 [node name="Lever" type="StaticBody2D"]
 script = ExtResource( 1 )
 dimension = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
-
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
+offset = Vector2( 0, -26 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )

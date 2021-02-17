@@ -14,7 +14,6 @@ id = "boss_key"
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
 hframes = 2
-frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )

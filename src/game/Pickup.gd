@@ -10,11 +10,16 @@ func set_id(value : String) -> void:
 	if is_inside_tree():
 		update_pickup()
 
-# warning-ignore:unused_signal
+var _stream : AudioStream
+
 signal picked_up
 
 func _ready():
 	update_pickup()
+
+func pick_up():
+	AudioEngine.play_effect(_stream)
+	emit_signal("picked_up")
 
 func update_pickup():
 	var pickup_settings : Dictionary = GLOBALS.PICKUPS_DICT.get(id, {})
@@ -34,3 +39,5 @@ func update_pickup():
 	if animation:
 		$AnimationPlayer.add_animation(animation.resource_name, animation)
 		$AnimationPlayer.play(animation.resource_name)
+
+	_stream = pickup_settings.get("stream", null)

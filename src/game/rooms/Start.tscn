@@ -5,7 +5,7 @@
 [ext_resource path="res://src/game/Lever.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/game/PressurePlate.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/game/PushableObject.tscn" type="PackedScene" id=5]
-[ext_resource path="res://src/game/Enemy.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/game/Pickup.tscn" type="PackedScene" id=6]
 
 [node name="Start" instance=ExtResource( 1 )]
 id = "start"
@@ -22,8 +22,8 @@ position = Vector2( -384, 0 )
 direction = 2
 type = 2
 
-[node name="Enemy" parent="Enemies" index="0" instance=ExtResource( 6 )]
-position = Vector2( -176, -72 )
+[node name="Pickup" parent="Pickups" index="0" instance=ExtResource( 6 )]
+position = Vector2( -40, 184 )
 
 [node name="Lever" parent="Levers" index="0" instance=ExtResource( 3 )]
 position = Vector2( -64, -128 )

@@ -1,7 +1,20 @@
+tool
 class_name Player
 extends KinematicBody2D
 
 onready var _interact_area := $InteractArea
+
+export(GLOBALS.DIRECTION) var direction := GLOBALS.DIRECTION.LEFT setget set_direction
+func set_direction(value : int) -> void:
+	direction = value
+	if is_inside_tree():
+		update_animation()
+
+export(bool) var is_moving := false setget set_is_moving
+func set_is_moving(value : bool) -> void:
+	is_moving = value
+	if is_inside_tree():
+		update_animation()
 
 var active_room : Node2D
 
@@ -10,14 +23,21 @@ var _overlapping_body : PhysicsBody2D
 
 signal dimension_changed
 
-func _ready():
-	var _error := State.connect("player_health_changed", self, "_on_player_health_changed")
-	_error = _interact_area.connect("area_entered", self, "_on_interact_area_entered")
-	_error = _interact_area.connect("body_entered", self, "_on_interact_body_entered")
-	_error = _interact_area.connect("body_exited", self, "_on_interact_body_exited")
+var _wilhelm_scream_stream := preload("res://audio/sfx/wilhelm_scream.ogg")
 
-	set_physics_process(true)
-	set_process_input(true)
+func _ready():
+	if not  Engine.editor_hint:
+		var _error := State.connect("player_health_changed", self, "_on_player_health_changed")
+		_error = _interact_area.connect("area_entered", self, "_on_interact_area_entered")
+		_error = _interact_area.connect("body_entered", self, "_on_interact_body_entered")
+		_error = _interact_area.connect("body_exited", self, "_on_interact_body_exited")
+
+		set_physics_process(true)
+		set_process_input(true)
+	else:
+		set_physics_process(false)
+
+	update_animation()
 
 func respawn():
 	global_position = active_room.global_position
@@ -26,7 +46,7 @@ func respawn():
 
 func _on_interact_area_entered(area : Area2D) -> void:
 	if area is Pickup:
-		area.emit_signal("picked_up")
+		area.pick_up()
 
 func _on_interact_body_entered(body : PhysicsBody2D) -> void:
 	if body is Door:
@@ -72,6 +92,7 @@ func _physics_process(_delta):
 		move_direction.x += 1
 
 	var normalized_direction := move_direction.normalized()
+	update_state(normalized_direction)
 	var _linear_velocity := move_and_slide(normalized_direction*move_speed)
 
 	if active_room:
@@ -83,7 +104,47 @@ func _physics_process(_delta):
 				set_physics_process(false)
 				set_process_input(true)
 				State.decrease_player_health()
+
+				AudioEngine.play_effect(_wilhelm_scream_stream)
 				respawn()
+
+func update_state(move_direction := Vector2.ZERO) -> void:
+	var abs_direction := move_direction.abs()
+	var old_is_moving := is_moving
+	var old_direction := direction
+
+	if abs_direction.x >= abs_direction.y:
+		if move_direction.x > 0:
+			direction = GLOBALS.DIRECTION.RIGHT
+			is_moving = true
+		elif move_direction.x < 0:
+			direction = GLOBALS.DIRECTION.LEFT
+			is_moving = true
+		else:
+			is_moving = false
+	elif abs_direction.y > abs_direction.x:
+		if move_direction.y > 0:
+			direction = GLOBALS.DIRECTION.BOTTOM
+			is_moving = true
+		elif move_direction.y < 0:
+			direction = GLOBALS.DIRECTION.TOP
+			is_moving = true
+		else:
+			is_moving = false
+	else:
+		is_moving = false
+
+	if old_direction != direction or old_is_moving != is_moving:
+		update_animation()
+
+func update_animation():
+	var animation_settings := GLOBALS.PLAYER_ANIMATIONS_DICT
+	animation_settings = animation_settings.get(is_moving, {})
+	animation_settings = animation_settings.get(direction, {})
+
+	$AnimatedSprite.play(animation_settings.get("animation", "idle_down"))
+	$AnimatedSprite.flip_h = animation_settings.get("flip_h", false)
+	$AnimatedSprite.flip_v = animation_settings.get("flip_v", false)
 
 func _input(event):
 	if event.is_action_pressed("toggle_heart"):

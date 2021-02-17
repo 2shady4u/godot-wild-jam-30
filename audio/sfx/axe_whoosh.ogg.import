@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/axe_whoosh.ogg-fdbd1e07580f9491c17659c30ba47823.oggstr"
+
+[deps]
+
+source_file="res://audio/sfx/axe_whoosh.ogg"
+dest_files=[ "res://.import/axe_whoosh.ogg-fdbd1e07580f9491c17659c30ba47823.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

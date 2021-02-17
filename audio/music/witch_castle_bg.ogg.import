@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/witch_castle_bg.ogg-7006c7fa2634e25624a401d1ae8b1b9e.oggstr"
+
+[deps]
+
+source_file="res://audio/music/witch_castle_bg.ogg"
+dest_files=[ "res://.import/witch_castle_bg.ogg-7006c7fa2634e25624a401d1ae8b1b9e.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

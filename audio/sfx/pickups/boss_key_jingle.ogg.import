@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/boss_key_jingle.ogg-acc74d5cfc6663fcb601a870ac2196be.oggstr"
+
+[deps]
+
+source_file="res://audio/sfx/pickups/boss_key_jingle.ogg"
+dest_files=[ "res://.import/boss_key_jingle.ogg-acc74d5cfc6663fcb601a870ac2196be.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

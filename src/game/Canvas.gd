@@ -4,6 +4,8 @@ onready var _rooms := $Rooms
 onready var _camera_2d := $Camera2D
 onready var _player := $Player
 
+var witch_castle_stream := preload("res://audio/music/witch_castle_bg.ogg")
+
 func _ready():
 	for child in _rooms.get_children():
 		var _error : int = child.connect("player_entered_room", self, "_on_player_entered_room", [child])
@@ -11,6 +13,7 @@ func _ready():
 
 		child.player = _player
 
+	AudioEngine.play_bg(witch_castle_stream)
 	_player.update_player()
 
 func _on_player_entered_room(room : Room) -> void:

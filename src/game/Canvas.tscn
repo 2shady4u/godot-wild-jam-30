@@ -15,7 +15,7 @@ __meta__ = {
 current = true
 smoothing_enabled = true
 
-[node name="Rooms" type="Node2D" parent="."]
+[node name="Rooms" type="YSort" parent="."]
 
 [node name="Start" parent="Rooms" instance=ExtResource( 4 )]
 

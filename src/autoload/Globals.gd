@@ -5,10 +5,45 @@ enum DIRECTION {TOP, BOTTOM, LEFT, RIGHT}
 enum DOOR_TYPE {LOCKED, BOSS, ROOM_COMPLETION}
 enum DIMENSION {EMERALD_CITY, WITCH_CASTLE}
 
+enum AUDIO_BUS {MASTER, MUSIC, SFX}
+
 const MONKEY_MOVE_SPEED := 40
 
 const MAX_MONKEY_HEALTH := 2
 const MAX_PLAYER_HEALTH := 3
+
+const PLAYER_ANIMATIONS_DICT := {
+	false: {
+		DIRECTION.TOP: {
+			"animation": "idle_up"
+		},
+		DIRECTION.BOTTOM: {
+			"animation": "idle_down"
+		},
+		DIRECTION.LEFT: {
+			"animation": "idle_right",
+			"flip_h": true
+		},
+		DIRECTION.RIGHT: {
+			"animation": "idle_right"
+		},
+	},
+	true: {
+		DIRECTION.TOP: {
+			"animation": "walk_up"
+		},
+		DIRECTION.BOTTOM: {
+			"animation": "walk_down"
+		},
+		DIRECTION.LEFT: {
+			"animation": "walk_right",
+			"flip_h": true
+		},
+		DIRECTION.RIGHT: {
+			"animation": "walk_right"
+		}
+	}
+}
 
 const ITEMS_DICT := {
 	"key": {
@@ -24,17 +59,20 @@ const ITEMS_DICT := {
 const PICKUPS_DICT := {
 	"key": {
 		"texture": preload('res://resources/key_atlastexture.tres'),
-		"item_id": "key"
+		"item_id": "key",
+		"stream": preload("res://audio/sfx/pickups/key_jingle.ogg")
 	},
 	"boss_key": {
 		"texture": preload('res://resources/boss_key_atlastexture_multi.tres'),
 		"item_id": "boss_key",
 		"hframes": 2,
-		"animation": preload("res://resources/boss_key_anim.tres")
+		"animation": preload("res://resources/boss_key_anim.tres"),
+		"stream": preload("res://audio/sfx/pickups/boss_key_jingle.ogg")
 	},
 	"oil_can": {
 		"texture": preload('res://resources/oil_can_atlastexture.tres'),
-		"actions": ["increase_health"]
+		"actions": ["increase_health"],
+		"stream": preload("res://audio/sfx/pickups/oil_can.ogg")
 	},
 	"heart": {
 		"texture": preload('res://resources/heart_atlastexture.tres'),
@@ -46,17 +84,21 @@ const LEVERS_DICT := {
 	DIMENSION.EMERALD_CITY: {
 		true: {
 			"texture": preload('res://resources/lever_on_emerald_city_atlastexture.tres'),
+			"offset": Vector2(0, -40)
 		},
 		false: {
 			"texture": preload('res://resources/lever_off_emerald_city_atlastexture.tres'),
+			"offset": Vector2(0, -40)
 		}
 	},
 	DIMENSION.WITCH_CASTLE: {
 		true: {
 			"texture": preload('res://resources/lever_on_witch_castle_atlastexture.tres'),
+			"offset": Vector2(0, -26)
 		},
 		false: {
 			"texture": preload('res://resources/lever_off_witch_castle_atlastexture.tres'),
+			"offset": Vector2(0, -26)
 		}
 	}
 }

@@ -89,6 +89,7 @@ config/icon="res://icon.png"
 Globals="*res://src/autoload/Globals.tscn"
 State="*res://src/autoload/State.gd"
 Flow="*res://src/autoload/Flow.tscn"
+AudioEngine="*res://src/autoload/AudioEngine.tscn"
 
 [display]
 

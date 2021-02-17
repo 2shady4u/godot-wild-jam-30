@@ -134,7 +134,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Levers" type="Node2D" parent="."]
+[node name="Levers" type="YSort" parent="."]
 __meta__ = {
 "_edit_lock_": true
 }
