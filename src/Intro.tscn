@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/Intro.gd" type="Script" id=1]
+[ext_resource path="res://audio/story/intro.ogg" type="AudioStream" id=2]
 
 [node name="Intro" type="Control"]
 anchor_right = 1.0
@@ -18,18 +19,64 @@ __meta__ = {
 }
 
 [node name="VB" type="VBoxContainer" parent="MC"]
-margin_left = 448.0
-margin_right = 576.0
+margin_right = 1024.0
 margin_bottom = 576.0
-size_flags_horizontal = 4
+custom_constants/separation = 24
 alignment = 1
 
+[node name="Label" type="Label" parent="MC/VB"]
+margin_top = 99.0
+margin_right = 1024.0
+margin_bottom = 351.0
+text = "You cursed Tin man are you there?
+Such insolence barging into my lair!
+My castle is not for you to hide.
+I'll have you quartered, I'll have you tried!
+
+That clockwork heart of yours is lost...
+When I find it, I'll have it tossed!
+
+You cursed Tin man can you hear?
+Your friends don't want you near!
+In fact, they would rather stay!
+Their cells are cozy, their cells are gay!
+
+You will regret the day our paths crossed...
+You shall be defeated at all cost!"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ProgressBar" type="ProgressBar" parent="MC/VB"]
+margin_left = 384.0
+margin_top = 375.0
+margin_right = 640.0
+margin_bottom = 389.0
+rect_min_size = Vector2( 256, 0 )
+size_flags_horizontal = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ReplayButton" type="Button" parent="MC/VB"]
+margin_left = 448.0
+margin_top = 413.0
+margin_right = 576.0
+margin_bottom = 433.0
+rect_min_size = Vector2( 128, 0 )
+size_flags_horizontal = 4
+text = "Replay"
+
 [node name="StartButton" type="Button" parent="MC/VB"]
-margin_top = 278.0
-margin_right = 128.0
-margin_bottom = 298.0
+margin_left = 448.0
+margin_top = 457.0
+margin_right = 576.0
+margin_bottom = 477.0
 rect_min_size = Vector2( 128, 0 )
 size_flags_horizontal = 4
 text = "Start"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
