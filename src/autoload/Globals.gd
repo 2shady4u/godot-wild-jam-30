@@ -53,6 +53,26 @@ const PLAYER_ANIMATIONS_DICT := {
 	}
 }
 
+const PLAYER_ATTACK_ANIMATIONS_DICT := {
+	DIRECTION.TOP: {
+		"animation": "attack_up",
+		"offset": Vector2(-4, -35)
+	},
+	DIRECTION.BOTTOM: {
+		"animation": "attack_down",
+		"offset": Vector2(-5, -40)
+	},
+	DIRECTION.LEFT: {
+		"animation": "attack_right",
+		"flip_h": true,
+		"offset": Vector2(0, -38)
+	},
+	DIRECTION.RIGHT: {
+		"animation": "attack_right",
+		"offset": Vector2(0, -38)
+	},
+}
+
 const ITEMS_DICT := {
 	"key": {
 		"initial_amount": 1,
@@ -132,10 +152,12 @@ const PRESSURE_PLATES_DICT := {
 
 const PUSHABLE_OBJECTS_DICT := {
 	DIMENSION.EMERALD_CITY: {
-	"texture": preload('res://resources/pushable_object_emerald_city_atlastexture.tres'),
+		"texture": preload('res://resources/pushable_object_emerald_city_atlastexture.tres'),
+		"offset": Vector2(0, -26)
 	},
 	DIMENSION.WITCH_CASTLE: {
-	"texture": preload('res://resources/pushable_object_witch_castle_atlastexture.tres')
+		"texture": preload('res://resources/pushable_object_witch_castle_atlastexture.tres'),
+		"offset": Vector2(7, -22)
 	}
 }
 

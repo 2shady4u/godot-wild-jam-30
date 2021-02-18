@@ -11,6 +11,10 @@ func stop_bg() -> void:
 	_background.stop()
 
 func play_effect(stream : AudioStream) -> void:
+# warning-ignore:return_value_discarded
+	play_and_return_effect(stream)
+
+func play_and_return_effect(stream : AudioStream) -> AudioStreamPlayer:
 	var effect := AudioStreamPlayer.new()
 	effect.bus = "SFX"
 
@@ -19,6 +23,13 @@ func play_effect(stream : AudioStream) -> void:
 
 	effect.stream = stream
 	effect.play()
+
+	return effect
+
+func stop_effect(effect : AudioStreamPlayer) -> void:
+	if effect and effect in _effects.get_children():
+		_effects.remove_child(effect)
+		effect.queue_free()
 
 func _on_audio_stream_player_finished(effect : AudioStreamPlayer) -> void:
 	_effects.remove_child(effect)

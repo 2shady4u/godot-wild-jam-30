@@ -17,3 +17,4 @@ func update_pushable_object():
 	var texture : Texture = pushable_objects_dict.get("texture", preload("res://icon.png"))
 	$Sprite.texture = texture
 
+	$Sprite.offset = pushable_objects_dict.get("offset", Vector2.ZERO)

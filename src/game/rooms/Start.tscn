@@ -35,7 +35,7 @@ position = Vector2( 192, 0 )
 position = Vector2( -128, 128 )
 
 [node name="PushableObject" parent="PushableObjects" index="0" instance=ExtResource( 5 )]
-position = Vector2( 64, 120 )
+position = Vector2( -64, 128 )
 
 [node name="CollisionShape2D" parent="." index="8"]
 visible = false

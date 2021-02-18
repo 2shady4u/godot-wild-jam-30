@@ -3,6 +3,7 @@ class_name Player
 extends KinematicBody2D
 
 onready var _interact_area := $InteractArea
+onready var _animated_sprite := $AnimatedSprite
 
 export(GLOBALS.DIRECTION) var direction := GLOBALS.DIRECTION.LEFT setget set_direction
 func set_direction(value : int) -> void:
@@ -16,14 +17,26 @@ func set_is_moving(value : bool) -> void:
 	if is_inside_tree():
 		update_animation()
 
+export(bool) var is_attacking := false setget set_is_attacking
+func set_is_attacking(value : bool) -> void:
+	is_attacking = value
+	if is_inside_tree():
+		update_animation()
+
 var active_room : Node2D
 
 var _overlapping_stack := []
 var _overlapping_body : PhysicsBody2D
 
+var _is_movement_allowed := true
+
+var _attack_effect : AudioStreamPlayer
+
 signal dimension_changed
 
 var _wilhelm_scream_stream := preload("res://audio/sfx/wilhelm_scream.ogg")
+var _axe_whoosh_stream := preload("res://audio/sfx/axe_whoosh.ogg")
+var _axe_hit_stream := preload("res://audio/sfx/axe_hit.ogg")
 
 func _ready():
 	if not  Engine.editor_hint:
@@ -31,6 +44,7 @@ func _ready():
 		_error = _interact_area.connect("area_entered", self, "_on_interact_area_entered")
 		_error = _interact_area.connect("body_entered", self, "_on_interact_body_entered")
 		_error = _interact_area.connect("body_exited", self, "_on_interact_body_exited")
+		_error = _animated_sprite.connect("animation_finished", self, "_on_animation_finished")
 
 		set_physics_process(true)
 		set_process_input(true)
@@ -93,7 +107,8 @@ func _physics_process(_delta):
 
 	var normalized_direction := move_direction.normalized()
 	update_state(normalized_direction)
-	var _linear_velocity := move_and_slide(normalized_direction*move_speed)
+	if _is_movement_allowed:
+		var _linear_velocity := move_and_slide(normalized_direction*move_speed)
 
 	if active_room:
 		var tile_index : int = active_room.get_cell(global_position)
@@ -137,18 +152,28 @@ func update_state(move_direction := Vector2.ZERO) -> void:
 	if old_direction != direction or old_is_moving != is_moving:
 		update_animation()
 
-func update_animation():
-	var animation_settings := GLOBALS.PLAYER_ANIMATIONS_DICT
-	animation_settings = animation_settings.get(is_moving, {})
-	animation_settings = animation_settings.get(direction, {})
+func update_animation() -> void:
+	if not _is_movement_allowed:
+		var animation_settings := GLOBALS.PLAYER_ATTACK_ANIMATIONS_DICT
+		animation_settings = animation_settings.get(direction, {})
 
-	$AnimatedSprite.play(animation_settings.get("animation", "idle_down"))
-	$AnimatedSprite.flip_h = animation_settings.get("flip_h", false)
-	$AnimatedSprite.flip_v = animation_settings.get("flip_v", false)
+		$AnimatedSprite.play(animation_settings.get("animation", "idle_down"))
+		$AnimatedSprite.flip_h = animation_settings.get("flip_h", false)
+		$AnimatedSprite.flip_v = animation_settings.get("flip_v", false)
 
-	$AnimatedSprite.offset = animation_settings.get("offset", Vector2.ZERO)
+		$AnimatedSprite.offset = animation_settings.get("offset", Vector2.ZERO)
+	else:
+		var animation_settings := GLOBALS.PLAYER_ANIMATIONS_DICT
+		animation_settings = animation_settings.get(is_moving, {})
+		animation_settings = animation_settings.get(direction, {})
 
-func _input(event):
+		$AnimatedSprite.play(animation_settings.get("animation", "idle_down"))
+		$AnimatedSprite.flip_h = animation_settings.get("flip_h", false)
+		$AnimatedSprite.flip_v = animation_settings.get("flip_v", false)
+
+		$AnimatedSprite.offset = animation_settings.get("offset", Vector2.ZERO)
+
+func _input(event) -> void:
 	if event.is_action_pressed("toggle_heart"):
 		match State.dimension:
 			GLOBALS.DIMENSION.WITCH_CASTLE:
@@ -158,7 +183,12 @@ func _input(event):
 		update_player()
 
 	if event.is_action_pressed("attack"):
-		print("ATTACK!")
+		_attack_effect = AudioEngine.play_and_return_effect(_axe_whoosh_stream)
+		is_attacking = true
+		_is_movement_allowed = false
+		update_animation()
+	elif event.is_action_released("attack"):
+		is_attacking = false
 
 	if event.is_action_pressed("interact"):
 		if _overlapping_body != null:
@@ -176,6 +206,14 @@ func _input(event):
 
 func _on_player_health_changed():
 	pass
+
+func _on_animation_finished():
+	if not is_attacking:
+		_is_movement_allowed = true
+		if _attack_effect:
+			AudioEngine.stop_effect(_attack_effect)
+			_attack_effect = null
+	update_animation()
 
 func update_player():
 	match State.dimension:

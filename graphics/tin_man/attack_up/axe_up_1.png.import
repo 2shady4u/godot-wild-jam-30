@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/frame1.png-21472748bd519dfcc25c7743cba881f1.stex"
+path="res://.import/axe_up_1.png-72df7e5ea2d17ba313cc609ec5e68490.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/monkey/frame1.png"
-dest_files=[ "res://.import/frame1.png-21472748bd519dfcc25c7743cba881f1.stex" ]
+source_file="res://graphics/tin_man/attack_up/axe_up_1.png"
+dest_files=[ "res://.import/axe_up_1.png-72df7e5ea2d17ba313cc609ec5e68490.stex" ]
 
 [params]
 
