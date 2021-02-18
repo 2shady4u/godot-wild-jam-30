@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/menu/SettingsMenuTab.gd" type="Script" id=1]
+[ext_resource path="res://src/game/UI/base/VolumeVBox.tscn" type="PackedScene" id=2]
 
 [node name="SettingsMenuTab" type="Control"]
 anchor_right = 1.0
@@ -24,16 +25,40 @@ __meta__ = {
 }
 
 [node name="VB" type="VBoxContainer" parent="MC"]
-margin_left = 448.0
+margin_left = 24.0
 margin_top = 24.0
-margin_right = 576.0
+margin_right = 1000.0
 margin_bottom = 552.0
 rect_min_size = Vector2( 128, 0 )
-size_flags_horizontal = 4
+custom_constants/separation = 24
 alignment = 1
 
+[node name="VB" type="VBoxContainer" parent="MC/VB"]
+margin_top = 202.0
+margin_right = 976.0
+margin_bottom = 282.0
+custom_constants/separation = 16
+
+[node name="MasterVBox" parent="MC/VB/VB" instance=ExtResource( 2 )]
+margin_right = 976.0
+
+[node name="MusicVBox" parent="MC/VB/VB" instance=ExtResource( 2 )]
+margin_top = 32.0
+margin_right = 976.0
+margin_bottom = 48.0
+audio_bus = 1
+
+[node name="SFXVBox" parent="MC/VB/VB" instance=ExtResource( 2 )]
+margin_top = 64.0
+margin_right = 976.0
+margin_bottom = 80.0
+audio_bus = 2
+
 [node name="BackButton" type="Button" parent="MC/VB"]
-margin_top = 254.0
-margin_right = 128.0
-margin_bottom = 274.0
+margin_left = 424.0
+margin_top = 306.0
+margin_right = 552.0
+margin_bottom = 326.0
+rect_min_size = Vector2( 128, 0 )
+size_flags_horizontal = 4
 text = "Back"

@@ -15,32 +15,40 @@ const MAX_PLAYER_HEALTH := 3
 const PLAYER_ANIMATIONS_DICT := {
 	false: {
 		DIRECTION.TOP: {
-			"animation": "idle_up"
+			"animation": "idle_up",
+			"offset": Vector2(-4, -35)
 		},
 		DIRECTION.BOTTOM: {
-			"animation": "idle_down"
+			"animation": "idle_down",
+			"offset": Vector2(-5, -40)
 		},
 		DIRECTION.LEFT: {
 			"animation": "idle_right",
-			"flip_h": true
+			"flip_h": true,
+			"offset": Vector2(0, -38)
 		},
 		DIRECTION.RIGHT: {
-			"animation": "idle_right"
+			"animation": "idle_right",
+			"offset": Vector2(0, -38)
 		},
 	},
 	true: {
 		DIRECTION.TOP: {
-			"animation": "walk_up"
+			"animation": "walk_up",
+			"offset": Vector2(-4, -35)
 		},
 		DIRECTION.BOTTOM: {
-			"animation": "walk_down"
+			"animation": "walk_down",
+			"offset": Vector2(-5, -40)
 		},
 		DIRECTION.LEFT: {
 			"animation": "walk_right",
-			"flip_h": true
+			"flip_h": true,
+			"offset": Vector2(0, -38)
 		},
 		DIRECTION.RIGHT: {
-			"animation": "walk_right"
+			"animation": "walk_right",
+			"offset": Vector2(0, -38)
 		}
 	}
 }

@@ -31,22 +31,22 @@ margin_bottom = 552.0
 custom_constants/separation = 24
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MC/VB"]
+[node name="VB" type="VBoxContainer" parent="MC/VB"]
 margin_top = 202.0
 margin_right = 976.0
 margin_bottom = 282.0
 custom_constants/separation = 16
 
-[node name="MasterVBox" parent="MC/VB/VBoxContainer" instance=ExtResource( 3 )]
+[node name="MasterVBox" parent="MC/VB/VB" instance=ExtResource( 3 )]
 margin_right = 976.0
 
-[node name="MusicVBox" parent="MC/VB/VBoxContainer" instance=ExtResource( 3 )]
+[node name="MusicVBox" parent="MC/VB/VB" instance=ExtResource( 3 )]
 margin_top = 32.0
 margin_right = 976.0
 margin_bottom = 48.0
 audio_bus = 1
 
-[node name="SFXVBox" parent="MC/VB/VBoxContainer" instance=ExtResource( 3 )]
+[node name="SFXVBox" parent="MC/VB/VB" instance=ExtResource( 3 )]
 margin_top = 64.0
 margin_right = 976.0
 margin_bottom = 80.0

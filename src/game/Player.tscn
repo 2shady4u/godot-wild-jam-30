@@ -1,49 +1,52 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=20 format=2]
 
-[ext_resource path="res://graphics/tin_man/right/frame1.png" type="Texture" id=1]
+[ext_resource path="res://graphics/tin_man/walk_right/frame0.png" type="Texture" id=1]
 [ext_resource path="res://src/game/Player.gd" type="Script" id=2]
-[ext_resource path="res://graphics/tin_man/right/frame3.png" type="Texture" id=3]
-[ext_resource path="res://graphics/tin_man/right/frame0.png" type="Texture" id=4]
-[ext_resource path="res://graphics/tin_man/right/frame2.png" type="Texture" id=5]
-[ext_resource path="res://graphics/tin_man/up/frame3.png" type="Texture" id=6]
-[ext_resource path="res://graphics/tin_man/up/frame1.png" type="Texture" id=7]
-[ext_resource path="res://graphics/tin_man/up/frame0.png" type="Texture" id=8]
-[ext_resource path="res://graphics/tin_man/up/frame2.png" type="Texture" id=9]
-[ext_resource path="res://graphics/tin_man/down/frame4.png" type="Texture" id=10]
-[ext_resource path="res://graphics/tin_man/down/frame0.png" type="Texture" id=11]
-[ext_resource path="res://graphics/tin_man/down/frame1.png" type="Texture" id=12]
-[ext_resource path="res://graphics/tin_man/down/frame3.png" type="Texture" id=13]
+[ext_resource path="res://graphics/tin_man/walk_down/frame4.png" type="Texture" id=3]
+[ext_resource path="res://graphics/tin_man/walk_right/frame1.png" type="Texture" id=4]
+[ext_resource path="res://graphics/tin_man/walk_up/frame0.png" type="Texture" id=5]
+[ext_resource path="res://graphics/tin_man/walk_up/frame1.png" type="Texture" id=6]
+[ext_resource path="res://graphics/tin_man/walk_up/frame2.png" type="Texture" id=7]
+[ext_resource path="res://graphics/tin_man/walk_down/frame3.png" type="Texture" id=8]
+[ext_resource path="res://graphics/tin_man/walk_up/frame3.png" type="Texture" id=9]
+[ext_resource path="res://graphics/tin_man/walk_right/frame2.png" type="Texture" id=10]
+[ext_resource path="res://graphics/tin_man/walk_right/frame3.png" type="Texture" id=11]
+[ext_resource path="res://graphics/tin_man/walk_down/frame0.png" type="Texture" id=12]
+[ext_resource path="res://graphics/tin_man/walk_down/frame1.png" type="Texture" id=13]
+[ext_resource path="res://graphics/tin_man/idle_down.png" type="Texture" id=14]
+[ext_resource path="res://graphics/tin_man/idle_right.png" type="Texture" id=15]
+[ext_resource path="res://graphics/tin_man/idle_up.png" type="Texture" id=16]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 4 ), ExtResource( 1 ), ExtResource( 5 ), ExtResource( 3 ) ],
+"frames": [ ExtResource( 1 ), ExtResource( 4 ), ExtResource( 10 ), ExtResource( 11 ) ],
 "loop": true,
 "name": "walk_right",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 11 ) ],
+"frames": [ ExtResource( 16 ) ],
 "loop": true,
-"name": "idle_down",
+"name": "idle_up",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 4 ) ],
-"loop": true,
-"name": "idle_right",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 10 ) ],
-"loop": true,
-"name": "walk_down",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 8 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 6 ) ],
+"frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 9 ) ],
 "loop": true,
 "name": "walk_up",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 8 ) ],
+"frames": [ ExtResource( 14 ) ],
 "loop": true,
-"name": "idle_up",
+"name": "idle_down",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 15 ) ],
+"loop": true,
+"name": "idle_right",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 8 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "walk_down",
 "speed": 5.0
 } ]
 
@@ -55,14 +58,14 @@ extents = Vector2( 32, 32 )
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
-direction = 1
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.75, 0.75 )
 frames = SubResource( 1 )
-animation = "idle_down"
+animation = "idle_right"
 playing = true
-offset = Vector2( 0, -40 )
+offset = Vector2( 0, -38 )
+flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )

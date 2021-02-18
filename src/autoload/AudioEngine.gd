@@ -7,6 +7,9 @@ func play_bg(stream : AudioStream) -> void:
 	_background.stream = stream
 	_background.play()
 
+func stop_bg() -> void:
+	_background.stop()
+
 func play_effect(stream : AudioStream) -> void:
 	var effect := AudioStreamPlayer.new()
 	effect.bus = "SFX"

@@ -146,6 +146,8 @@ func update_animation():
 	$AnimatedSprite.flip_h = animation_settings.get("flip_h", false)
 	$AnimatedSprite.flip_v = animation_settings.get("flip_v", false)
 
+	$AnimatedSprite.offset = animation_settings.get("offset", Vector2.ZERO)
+
 func _input(event):
 	if event.is_action_pressed("toggle_heart"):
 		match State.dimension:

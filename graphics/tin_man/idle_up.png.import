@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/frame3.png-e7c631511637b7a1398031fdb86cb604.stex"
+path="res://.import/idle_up.png-647b362b28a8a8601eaef2a10161e7ef.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/tin_man/right/frame3.png"
-dest_files=[ "res://.import/frame3.png-e7c631511637b7a1398031fdb86cb604.stex" ]
+source_file="res://graphics/tin_man/idle_up.png"
+dest_files=[ "res://.import/idle_up.png-647b362b28a8a8601eaef2a10161e7ef.stex" ]
 
 [params]
 

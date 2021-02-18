@@ -13,6 +13,8 @@ func _ready() -> void:
 	_error = _replay_button.connect("pressed", self, "_on_replay_button_pressed")
 	_error = _audio_stream_player.connect("finished", self, "_on_audio_stream_player_finished")
 
+	AudioEngine.stop_bg()
+
 	_start_button.grab_focus()
 	var audio_stream := (_audio_stream_player as AudioStreamPlayer).stream
 	_stream_length = audio_stream.get_length()
@@ -28,7 +30,6 @@ func start_dialogue() -> void:
 func _process(_delta : float) -> void:
 	var playback_position := (_audio_stream_player as AudioStreamPlayer).get_playback_position()
 	if _stream_length != 0.0:
-		print(playback_position/_stream_length)
 		_progress_bar.value = 100.0*playback_position/_stream_length
 
 func _on_start_button_pressed() -> void:

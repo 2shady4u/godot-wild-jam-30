@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/Defeat.gd" type="Script" id=1]
+[ext_resource path="res://audio/story/defeat_crazy.ogg" type="AudioStream" id=2]
 
 [node name="Defeat" type="Control"]
 anchor_right = 1.0
@@ -26,37 +27,76 @@ margin_left = 24.0
 margin_top = 24.0
 margin_right = 1000.0
 margin_bottom = 552.0
-custom_constants/separation = 24
+custom_constants/separation = 16
 alignment = 1
 
 [node name="Label" type="Label" parent="MC/VB"]
-margin_top = 217.0
+margin_top = 71.0
 margin_right = 976.0
-margin_bottom = 231.0
+margin_bottom = 85.0
 text = "~ DEFEAT ~"
 align = 1
 
 [node name="VB" type="VBoxContainer" parent="MC/VB"]
-margin_top = 255.0
+margin_top = 101.0
 margin_right = 976.0
-margin_bottom = 311.0
-custom_constants/separation = 16
+margin_bottom = 384.0
+custom_constants/separation = 24
 
-[node name="MenuButton" type="Button" parent="MC/VB/VB"]
+[node name="Label" type="Label" parent="MC/VB/VB"]
+margin_right = 976.0
+margin_bottom = 201.0
+text = "Oh my! Thank you for the scrap metal, bolts and nuts!
+Who knew that a tin can was such a klutz?
+
+My minions shall find use for all this tin...
+or it might just end up in a bin!
+But who can say?
+In the end, it's just trash for them to play!
+
+This fake heart of yours, I dropped!
+With a cling and a clang, I'm sure it popped!
+No more emotions and no more man!
+Just a bunch of tin in a can."
+align = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="MC/VB/VB"]
+margin_left = 360.0
+margin_top = 225.0
+margin_right = 616.0
+margin_bottom = 239.0
+rect_min_size = Vector2( 256, 0 )
+size_flags_horizontal = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ReplayButton" type="Button" parent="MC/VB/VB"]
 margin_left = 424.0
+margin_top = 263.0
 margin_right = 552.0
-margin_bottom = 20.0
+margin_bottom = 283.0
+rect_min_size = Vector2( 128, 0 )
+size_flags_horizontal = 4
+text = "Replay"
+
+[node name="MenuButton" type="Button" parent="MC/VB"]
+margin_left = 424.0
+margin_top = 400.0
+margin_right = 552.0
+margin_bottom = 420.0
 rect_min_size = Vector2( 128, 0 )
 size_flags_horizontal = 4
 text = "Quit to Menu"
 
-[node name="QuitButton" type="Button" parent="MC/VB/VB"]
+[node name="QuitButton" type="Button" parent="MC/VB"]
 margin_left = 424.0
-margin_top = 36.0
+margin_top = 436.0
 margin_right = 552.0
-margin_bottom = 56.0
+margin_bottom = 456.0
 rect_min_size = Vector2( 128, 0 )
 size_flags_horizontal = 4
 text = "Quit Game"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
