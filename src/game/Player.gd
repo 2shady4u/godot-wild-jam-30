@@ -30,8 +30,6 @@ var _overlapping_body : PhysicsBody2D
 
 var _is_movement_allowed := true
 
-var _attack_effect : AudioStreamPlayer
-
 signal dimension_changed
 
 var _wilhelm_scream_stream := preload("res://audio/sfx/wilhelm_scream.ogg")
@@ -39,12 +37,13 @@ var _axe_whoosh_stream := preload("res://audio/sfx/axe_whoosh.ogg")
 var _axe_hit_stream := preload("res://audio/sfx/axe_hit.ogg")
 
 func _ready():
-	if not  Engine.editor_hint:
+	if not Engine.editor_hint:
 		var _error := State.connect("player_health_changed", self, "_on_player_health_changed")
 		_error = _interact_area.connect("area_entered", self, "_on_interact_area_entered")
 		_error = _interact_area.connect("body_entered", self, "_on_interact_body_entered")
 		_error = _interact_area.connect("body_exited", self, "_on_interact_body_exited")
 		_error = _animated_sprite.connect("animation_finished", self, "_on_animation_finished")
+		_error = _animated_sprite.connect("frame_changed", self, "_on_frame_changed")
 
 		set_physics_process(true)
 		set_process_input(true)
@@ -153,7 +152,7 @@ func update_state(move_direction := Vector2.ZERO) -> void:
 		update_animation()
 
 func update_animation() -> void:
-	if not _is_movement_allowed:
+	if is_attacking:
 		var animation_settings := GLOBALS.PLAYER_ATTACK_ANIMATIONS_DICT
 		animation_settings = animation_settings.get(direction, {})
 
@@ -162,7 +161,7 @@ func update_animation() -> void:
 		$AnimatedSprite.flip_v = animation_settings.get("flip_v", false)
 
 		$AnimatedSprite.offset = animation_settings.get("offset", Vector2.ZERO)
-	else:
+	elif _is_movement_allowed:
 		var animation_settings := GLOBALS.PLAYER_ANIMATIONS_DICT
 		animation_settings = animation_settings.get(is_moving, {})
 		animation_settings = animation_settings.get(direction, {})
@@ -183,9 +182,9 @@ func _input(event) -> void:
 		update_player()
 
 	if event.is_action_pressed("attack"):
-		_attack_effect = AudioEngine.play_and_return_effect(_axe_whoosh_stream)
 		is_attacking = true
 		_is_movement_allowed = false
+		AudioEngine.play_effect(_axe_whoosh_stream)
 		update_animation()
 	elif event.is_action_released("attack"):
 		is_attacking = false
@@ -210,10 +209,13 @@ func _on_player_health_changed():
 func _on_animation_finished():
 	if not is_attacking:
 		_is_movement_allowed = true
-		if _attack_effect:
-			AudioEngine.stop_effect(_attack_effect)
-			_attack_effect = null
 	update_animation()
+
+func _on_frame_changed():
+	if is_attacking:
+		match _animated_sprite.frame:
+			0:
+				AudioEngine.play_effect(_axe_whoosh_stream)
 
 func update_player():
 	match State.dimension:

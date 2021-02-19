@@ -11,5 +11,5 @@ dest_files=[ "res://.import/axe_whoosh.ogg-fdbd1e07580f9491c17659c30ba47823.oggs
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

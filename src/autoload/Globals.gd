@@ -73,6 +73,46 @@ const PLAYER_ATTACK_ANIMATIONS_DICT := {
 	},
 }
 
+const MONKEY_ANIMATIONS_DICT := {
+	DIRECTION.TOP: {
+		"animation": "walk_up",
+		"offset": Vector2(-4, -35)
+	},
+	DIRECTION.BOTTOM: {
+		"animation": "walk_down",
+		"offset": Vector2(-5, -40)
+	},
+	DIRECTION.LEFT: {
+		"animation": "walk_right",
+		"flip_h": true,
+		"offset": Vector2(0, -38)
+	},
+	DIRECTION.RIGHT: {
+		"animation": "walk_right",
+		"offset": Vector2(0, -38)
+	},
+}
+
+const MONKEY_ATTACK_ANIMATIONS_DICT := {
+	DIRECTION.TOP: {
+		"animation": "attack_up",
+		"offset": Vector2(-4, -35)
+	},
+	DIRECTION.BOTTOM: {
+		"animation": "attack_down",
+		"offset": Vector2(-5, -40)
+	},
+	DIRECTION.LEFT: {
+		"animation": "attack_right",
+		"flip_h": true,
+		"offset": Vector2(0, -38)
+	},
+	DIRECTION.RIGHT: {
+		"animation": "attack_right",
+		"offset": Vector2(0, -38)
+	},
+}
+
 const ITEMS_DICT := {
 	"key": {
 		"initial_amount": 1,
