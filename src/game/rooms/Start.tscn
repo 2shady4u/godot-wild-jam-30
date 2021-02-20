@@ -44,6 +44,10 @@ type = 3
 position = Vector2( -320, 192 )
 type = 2
 
+[node name="Pickup2" parent="Pickups" index="1" instance=ExtResource( 5 )]
+position = Vector2( 256, 128 )
+type = 3
+
 [node name="PressurePlates" parent="." index="4"]
 z_index = -1
 

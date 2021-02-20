@@ -73,5 +73,6 @@ func pick_up_pickup(pickup_type : int) -> void:
 			binding.call_func()
 
 var bindings := {
-	"increase_health": funcref(State, "increase_player_health")
+	"increase_health": funcref(State, "increase_player_health"),
+	"acquire_heart": funcref(State, "acquire_heart")
 }

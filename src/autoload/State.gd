@@ -2,6 +2,7 @@ extends Node
 
 signal player_health_changed
 signal item_amount_changed
+signal dimension_changed
 signal heart_acquired
 
 var player_health := GLOBALS.MAX_PLAYER_HEALTH setget set_player_health
@@ -13,7 +14,10 @@ func set_player_health(value : int) -> void:
 		emit_signal("player_health_changed")
 
 var inventory := {}
-var dimension : int = GLOBALS.DIMENSION.WITCH_CASTLE
+var dimension : int = GLOBALS.DIMENSION.WITCH_CASTLE setget set_dimension
+func set_dimension(value : int) -> void:
+	dimension = value
+	emit_signal("dimension_changed")
 
 var has_heart := false setget set_has_heart
 func set_has_heart(value : bool) -> void:
@@ -37,6 +41,9 @@ func increase_player_health():
 
 func decrease_player_health():
 	self.player_health -= 1
+
+func acquire_heart():
+	self.has_heart = true
 
 func get_item_amount(item_type : int) -> int:
 	return inventory.get(item_type, 0)

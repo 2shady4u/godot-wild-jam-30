@@ -203,7 +203,7 @@ func update_animation() -> void:
 			$AttackArea.rotation_degrees = 0
 
 func _input(event) -> void:
-	if event.is_action_pressed("toggle_heart"):
+	if event.is_action_pressed("toggle_heart") and State.has_heart:
 		match State.dimension:
 			GLOBALS.DIMENSION.WITCH_CASTLE:
 				State.dimension = GLOBALS.DIMENSION.EMERALD_CITY
