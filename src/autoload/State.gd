@@ -38,13 +38,13 @@ func increase_player_health():
 func decrease_player_health():
 	self.player_health -= 1
 
-func get_item_amount(item_id : String) -> int:
-	return inventory.get(item_id, 0)
+func get_item_amount(item_type : int) -> int:
+	return inventory.get(item_type, 0)
 
-func increase_item_amount(item_id : String):
-	inventory[item_id] += 1
+func increase_item_amount(item_type : int):
+	inventory[item_type] += 1
 	emit_signal("item_amount_changed")
 
-func decrease_item_amount(item_id : String):
-	inventory[item_id] -= 1
+func decrease_item_amount(item_type : String):
+	inventory[item_type] -= 1
 	emit_signal("item_amount_changed")

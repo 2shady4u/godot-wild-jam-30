@@ -58,12 +58,12 @@ func change_scene_to(key : String) -> void:
 	else:
 		push_error("Requested scene '{0}' was not recognized... ignoring call for changing scene.".format([key]))
 
-func pick_up_pickup(pickup_id) -> void:
-	var pickup_dict : Dictionary = GLOBALS.PICKUPS_DICT.get(pickup_id, {})
+func pick_up_pickup(pickup_type : int) -> void:
+	var pickup_dict : Dictionary = GLOBALS.PICKUPS_DICT.get(pickup_type, {})
 	# Try to add an item to the inventory!
-	var item_id : String = pickup_dict.get("item_id", "")
-	if not item_id.empty():
-		State.increase_item_amount(item_id)
+	var item_type : int = pickup_dict.get("item_type", -1)
+	if item_type != -1:
+		State.increase_item_amount(item_type)
 
 	# Do other stuff here!
 	var actions : Array = pickup_dict.get("actions", [])

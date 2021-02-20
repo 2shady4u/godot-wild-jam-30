@@ -41,10 +41,14 @@ extents = Vector2( 32, 32 )
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 48, 48 )
 
-[node name="YellowBrickMonster" type="StaticBody2D"]
+[node name="YellowBrickMonster" type="RigidBody2D"]
+collision_layer = 7
+collision_mask = 7
+mode = 2
+gravity_scale = 0.0
+linear_damp = 100.0
+angular_damp = 100.0
 script = ExtResource( 1 )
-direction = 0
-dimension = 1
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.5, 0.5 )

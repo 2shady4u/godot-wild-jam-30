@@ -5,6 +5,7 @@ extends KinematicBody2D
 onready var _interact_area := $InteractArea
 onready var _attack_area := $AttackArea
 onready var _animated_sprite := $AnimatedSprite
+onready var _attack_timer := $AttackTimer
 
 export(GLOBALS.DIRECTION) var direction := GLOBALS.DIRECTION.LEFT setget set_direction
 func set_direction(value : int) -> void:
@@ -30,6 +31,8 @@ var _overlapping_stack := []
 var _overlapping_body : PhysicsBody2D
 
 var _is_movement_allowed := true
+var _is_under_attack := false
+var _attack_direction : Vector2
 
 signal dimension_changed
 
@@ -39,6 +42,9 @@ var _axe_hit_stream := preload("res://audio/sfx/axe_hit.ogg")
 
 func _ready():
 	if not Engine.editor_hint:
+		add_to_group("players")
+		_attack_area.monitoring = false
+
 		var _error := State.connect("player_health_changed", self, "_on_player_health_changed")
 		_error = _interact_area.connect("area_entered", self, "_on_interact_area_entered")
 		_error = _interact_area.connect("body_entered", self, "_on_interact_body_entered")
@@ -53,6 +59,11 @@ func _ready():
 		set_physics_process(false)
 
 	update_animation()
+
+func decrease_health(enemy_position : Vector2):
+	_is_under_attack = true
+	_attack_direction = enemy_position - position
+	State.decrease_player_health()
 
 func respawn():
 	global_position = active_room.global_position
@@ -82,7 +93,7 @@ func _on_interact_body_exited(body : PhysicsBody2D) -> void:
 func _on_attack_body_entered(body : PhysicsBody2D):
 	if body is Monkey:
 		AudioEngine.play_effect(_axe_hit_stream)
-		(body as Monkey).decrease_health()
+		(body as Monkey).decrease_health(position)
 		print("monkey!")
 
 func update_overlapping_body():
@@ -101,7 +112,7 @@ func sort_overlapping_stack(a : PhysicsBody2D, b : PhysicsBody2D):
 
 func _physics_process(_delta):
 	var move_direction := Vector2.ZERO
-	var move_speed := 200
+	var move_speed := GLOBALS.PLAYER_MOVE_SPEED
 
 	if Input.is_action_pressed("move_down"):
 		move_direction.y += 1
@@ -204,7 +215,7 @@ func _input(event) -> void:
 		is_attacking = true
 		if _is_movement_allowed:
 			_is_movement_allowed = false
-			_attack_area.monitoring = true
+			toggle_attack_monitoring()
 			AudioEngine.play_effect(_axe_whoosh_stream)
 		update_animation()
 	elif event.is_action_released("attack"):
@@ -213,8 +224,8 @@ func _input(event) -> void:
 	if event.is_action_pressed("interact"):
 		if _overlapping_body != null:
 			if _overlapping_body is Door:
-				if State.get_item_amount("key") > 0:
-					State.decrease_item_amount("key")
+				if State.get_item_amount(GLOBALS.ITEM_TYPE.KEY) > 0:
+					State.decrease_item_amount(GLOBALS.ITEM_TYPE.KEY)
 					_overlapping_body.open()
 			elif _overlapping_body is Lever:
 				_overlapping_body.toggle()
@@ -236,12 +247,14 @@ func _on_frame_changed():
 	if is_attacking:
 		match _animated_sprite.frame:
 			0:
-				print("true")
-				_attack_area.monitoring = true
+				toggle_attack_monitoring()
 				AudioEngine.play_effect(_axe_whoosh_stream)
-			2:
-				print("false")
-				_attack_area.monitoring = false
+
+func toggle_attack_monitoring():
+	_attack_area.monitoring = true
+	_attack_timer.start()
+	yield(_attack_timer, "timeout")
+	_attack_area.monitoring = false
 
 func update_player():
 	match State.dimension:

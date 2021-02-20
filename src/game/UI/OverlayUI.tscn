@@ -56,21 +56,24 @@ texture = ExtResource( 2 )
 expand = true
 stretch_mode = 6
 
-[node name="HealthHBox" type="HBoxContainer" parent="HB/Left/MC/VB"]
+[node name="HealthHBox" type="GridContainer" parent="HB/Left/MC/VB"]
+margin_left = 6.0
 margin_top = 68.0
-margin_right = 96.0
+margin_right = 90.0
 margin_bottom = 100.0
-custom_constants/separation = -6
-alignment = 1
+size_flags_horizontal = 4
+custom_constants/vseparation = -6
+custom_constants/hseparation = -6
+columns = 3
 
 [node name="HealthRect" parent="HB/Left/MC/VB/HealthHBox" instance=ExtResource( 3 )]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 6.0
+margin_left = 0.0
 margin_top = 0.0
-margin_right = 38.0
+margin_right = 32.0
 margin_bottom = 32.0
 
 [node name="HealthRect2" parent="HB/Left/MC/VB/HealthHBox" instance=ExtResource( 3 )]
@@ -78,9 +81,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 32.0
+margin_left = 26.0
 margin_top = 0.0
-margin_right = 64.0
+margin_right = 58.0
 margin_bottom = 32.0
 
 [node name="HealthRect3" parent="HB/Left/MC/VB/HealthHBox" instance=ExtResource( 3 )]
@@ -88,9 +91,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 58.0
+margin_left = 52.0
 margin_top = 0.0
-margin_right = 90.0
+margin_right = 84.0
 margin_bottom = 32.0
 
 [node name="Control" type="Control" parent="HB"]

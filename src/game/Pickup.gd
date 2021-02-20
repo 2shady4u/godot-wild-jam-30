@@ -2,13 +2,13 @@ tool
 class_name Pickup
 extends Area2D
 
-onready var _sprite := $Sprite
-
-export(String) var id := "" setget set_id
-func set_id(value : String) -> void:
-	id = value
+export(GLOBALS.PICKUP_TYPE) var type : int setget set_type
+func set_type(value : int) -> void:
+	type = value
 	if is_inside_tree():
 		update_pickup()
+
+onready var _sprite := $Sprite
 
 var _stream : AudioStream
 
@@ -22,7 +22,7 @@ func pick_up():
 	emit_signal("picked_up")
 
 func update_pickup():
-	var pickup_settings : Dictionary = GLOBALS.PICKUPS_DICT.get(id, {})
+	var pickup_settings : Dictionary = GLOBALS.PICKUPS_DICT.get(type, {})
 
 	var texture : Texture = pickup_settings.get("texture", preload("res://icon.png"))
 	$Sprite.texture = texture

@@ -1,23 +1,19 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/game/Pickup.gd" type="Script" id=1]
-[ext_resource path="res://resources/boss_key_atlastexture_multi.tres" type="Texture" id=2]
-[ext_resource path="res://resources/boss_key_anim.tres" type="Animation" id=3]
+[ext_resource path="res://resources/key_atlastexture.tres" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 [node name="Pickup" type="Area2D"]
 script = ExtResource( 1 )
-id = "boss_key"
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
-hframes = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 4.0
-anims/sparkles = ExtResource( 3 )

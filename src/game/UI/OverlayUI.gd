@@ -25,7 +25,7 @@ func _ready():
 	# Add all the items!
 	for key in GLOBALS.ITEMS_DICT.keys():
 		var item_hbox := SCENE_ITEM_HBOX.instance()
-		item_hbox.id = key
+		item_hbox.type = key
 
 		_inventory_vbox.add_child(item_hbox)
 
@@ -48,6 +48,6 @@ func update_overlay():
 		i += 1
 
 	for child in _inventory_vbox.get_children():
-		var item_id : String = child.id
-		var amount : int = State.get_item_amount(item_id)
+		var item_type : int = child.type
+		var amount : int = State.get_item_amount(item_type)
 		child.amount = amount

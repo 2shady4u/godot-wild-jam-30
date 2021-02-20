@@ -3,6 +3,8 @@ class_name Monkey
 extends KinematicBody2D
 
 onready var _animated_sprite := $AnimatedSprite
+onready var _attack_area := $AttackArea
+onready var _attack_timer := $AttackTimer
 
 export(GLOBALS.DIRECTION) var direction := GLOBALS.DIRECTION.LEFT setget set_direction
 func set_direction(value : int) -> void:
@@ -25,6 +27,8 @@ func set_player_health(value : int) -> void:
 var nav_path := []
 
 var _is_movement_allowed := true
+var _is_under_attack := false
+var _attack_direction : Vector2
 
 # warning-ignore:unused_signal
 signal defeated
@@ -33,35 +37,53 @@ signal nav_path_requested
 func _ready():
 	if not Engine.editor_hint:
 		add_to_group("enemies")
+		_attack_area.monitoring = false
 
 		var _error : int = _animated_sprite.connect("animation_finished", self, "_on_animation_finished")
+		_error = _attack_area.connect("body_entered", self, "_on_attack_body_entered")
 		set_physics_process(true)
 	else:
 		set_physics_process(false)
 
-func increase_health():
-	self.health += 1
-
-func decrease_health():
+func decrease_health(player_position : Vector2):
+	_is_under_attack = true
+	_attack_direction = player_position - position
 	self.health -= 1
 
 func _physics_process(delta):
 	emit_signal("nav_path_requested")
 
-	var move_direction := Vector2.ZERO
-	var move_speed := GLOBALS.MONKEY_MOVE_SPEED
+	if not _is_under_attack:
+		var move_direction := Vector2.ZERO
+		var move_speed := GLOBALS.MONKEY_MOVE_SPEED
 
-	if nav_path.size() > 0:
-		var distance := position.distance_to(nav_path[0])
-		if distance > move_speed * delta:
-			var new_position := position.linear_interpolate(nav_path[0], move_speed/distance)
-			move_direction = new_position - position
-		else:
-			nav_path.remove(0)
+		if nav_path.size() > 0:
+			var distance := position.distance_to(nav_path[0])
+			if distance > move_speed * delta:
+				var new_position := position.linear_interpolate(nav_path[0], move_speed/distance)
+				move_direction = new_position - position
+			else:
+				nav_path.remove(0)
 
-	var normalized_direction := move_direction.normalized()
-	update_state(normalized_direction)
-	var _linear_velocity := move_and_slide(normalized_direction*move_speed)
+		if nav_path.size() > 0:
+			var distance := position.distance_to(nav_path.back())
+			if distance < 36:
+				is_attacking = true
+				if _is_movement_allowed:
+					_is_movement_allowed = false
+					toggle_attack_monitoring()
+					update_animation()
+				else:
+					is_attacking = false
+
+		var normalized_direction := move_direction.normalized()
+		update_state(normalized_direction)
+		if _is_movement_allowed:
+			var _linear_velocity := move_and_slide(normalized_direction*move_speed)
+	else:
+		var move_speed := 2*GLOBALS.MONKEY_MOVE_SPEED
+		var _linear_velocity := move_and_slide(-_attack_direction*move_speed)
+		_is_under_attack = false
 
 func update_state(move_direction := Vector2.ZERO) -> void:
 	var abs_direction := move_direction.abs()
@@ -100,6 +122,27 @@ func update_animation() -> void:
 		$AnimatedSprite.flip_v = animation_settings.get("flip_v", false)
 
 		#$AnimatedSprite.offset = animation_settings.get("offset", Vector2.ZERO)
+
+	match direction:
+		GLOBALS.DIRECTION.LEFT:
+			$AttackArea.rotation_degrees = 90
+		GLOBALS.DIRECTION.RIGHT:
+			$AttackArea.rotation_degrees = -90
+		GLOBALS.DIRECTION.TOP:
+			$AttackArea.rotation_degrees = 180
+		GLOBALS.DIRECTION.BOTTOM:
+			$AttackArea.rotation_degrees = 0
+
+func _on_attack_body_entered(body : PhysicsBody2D):
+	if body.is_in_group("players"):
+		body.decrease_health(position)
+		print("player!")
+
+func toggle_attack_monitoring():
+	_attack_area.monitoring = true
+	_attack_timer.start()
+	yield(_attack_timer, "timeout")
+	_attack_area.monitoring = false
 
 func _on_animation_finished():
 	if not is_attacking:
