@@ -3,8 +3,8 @@ extends Control
 const SCENE_HEALTH_RECT := preload("res://src/game/UI/game_overlay/HealthRect.tscn")
 const SCENE_ITEM_HBOX := preload("res://src/game/UI/game_overlay/ItemHBox.tscn")
 
-onready var _health_hbox := $HB/Control/MC/HB/HealthHBox
-onready var _inventory_vbox := $HB/Control/InventoryMC/VB
+onready var _health_hbox := $HB/Left/MC/VB/HealthHBox
+onready var _inventory_vbox := $HB/Right/InventoryMC/VB
 
 func _ready():
 	var _error := State.connect("player_health_changed", self, "_on_player_health_changed")

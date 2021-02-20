@@ -36,7 +36,8 @@ func _ready() -> void:
 		_error = child.connect("toggled", self, "_on_lever_toggled")
 
 	for child in _enemies.get_children():
-		_error = child.connect("nav_path_requested", self, "_on_nav_path_requested", [child])
+		if child is Monkey:
+			_error = child.connect("nav_path_requested", self, "_on_nav_path_requested", [child])
 		_error = child.connect("defeated", self, "_on_enemy_defeated", [child])
 
 func _on_body_entered(body : PhysicsBody2D) -> void:
@@ -62,6 +63,9 @@ func _on_dimension_changed() -> void:
 		(child as PressurePlate).dimension = State.dimension
 	for child in _pushable_objects.get_children():
 		(child as PushableObject).dimension = State.dimension
+	for child in _enemies.get_children():
+		if child is YellowBrickMonster:
+			(child as YellowBrickMonster).dimension = State.dimension
 
 func get_cell(player_position : Vector2) -> int:
 	if active_tilemap:
@@ -97,7 +101,7 @@ func _on_lever_toggled() -> void:
 		var rewards : Array = room_settings.get("rewards", [])
 		_on_room_completed(rewards)
 
-func _on_nav_path_requested(enemy : Enemy) -> void:
+func _on_nav_path_requested(enemy : PhysicsBody2D) -> void:
 	var enemy_position := enemy.global_position
 	var player_position := player.global_position
 	var nav_path : PoolVector2Array = _navigation_2d.get_simple_path(enemy_position, player_position)
@@ -105,7 +109,7 @@ func _on_nav_path_requested(enemy : Enemy) -> void:
 
 	enemy.nav_path = nav_path
 
-func _on_enemy_defeated(enemy : Enemy) -> void:
+func _on_enemy_defeated(enemy : PhysicsBody2D) -> void:
 	# Delete the enemy!
 	_enemies.remove_child(enemy)
 	enemy.queue_free()

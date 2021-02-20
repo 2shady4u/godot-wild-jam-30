@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/Defeat.gd" type="Script" id=1]
 [ext_resource path="res://audio/story/defeat_crazy.ogg" type="AudioStream" id=2]
+[ext_resource path="res://resources/ui_theme.tres" type="Theme" id=3]
 
 [node name="Defeat" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 3 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -31,16 +33,16 @@ custom_constants/separation = 16
 alignment = 1
 
 [node name="Label" type="Label" parent="MC/VB"]
-margin_top = 71.0
+margin_top = 56.0
 margin_right = 976.0
-margin_bottom = 85.0
+margin_bottom = 70.0
 text = "~ DEFEAT ~"
 align = 1
 
 [node name="VB" type="VBoxContainer" parent="MC/VB"]
-margin_top = 101.0
+margin_top = 86.0
 margin_right = 976.0
-margin_bottom = 384.0
+margin_bottom = 379.0
 custom_constants/separation = 24
 
 [node name="Label" type="Label" parent="MC/VB/VB"]
@@ -75,25 +77,25 @@ __meta__ = {
 margin_left = 424.0
 margin_top = 263.0
 margin_right = 552.0
-margin_bottom = 283.0
+margin_bottom = 293.0
 rect_min_size = Vector2( 128, 0 )
 size_flags_horizontal = 4
 text = "Replay"
 
 [node name="MenuButton" type="Button" parent="MC/VB"]
 margin_left = 424.0
-margin_top = 400.0
+margin_top = 395.0
 margin_right = 552.0
-margin_bottom = 420.0
+margin_bottom = 425.0
 rect_min_size = Vector2( 128, 0 )
 size_flags_horizontal = 4
 text = "Quit to Menu"
 
 [node name="QuitButton" type="Button" parent="MC/VB"]
 margin_left = 424.0
-margin_top = 436.0
+margin_top = 441.0
 margin_right = 552.0
-margin_bottom = 456.0
+margin_bottom = 471.0
 rect_min_size = Vector2( 128, 0 )
 size_flags_horizontal = 4
 text = "Quit Game"

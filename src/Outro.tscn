@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/Outro.gd" type="Script" id=1]
 [ext_resource path="res://audio/story/outro.ogg" type="AudioStream" id=2]
+[ext_resource path="res://resources/ui_theme.tres" type="Theme" id=3]
 
 [node name="Outro" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 3 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -31,9 +33,9 @@ custom_constants/separation = 24
 alignment = 1
 
 [node name="Label" type="Label" parent="MC/VB"]
-margin_top = 126.0
+margin_top = 116.0
 margin_right = 976.0
-margin_bottom = 276.0
+margin_bottom = 266.0
 text = "You cursed man of tin!
 such a grievance, such a sin!
 You clockwork brute without finesse!
@@ -47,9 +49,9 @@ align = 1
 
 [node name="ProgressBar" type="ProgressBar" parent="MC/VB"]
 margin_left = 360.0
-margin_top = 300.0
+margin_top = 290.0
 margin_right = 616.0
-margin_bottom = 314.0
+margin_bottom = 304.0
 rect_min_size = Vector2( 256, 0 )
 size_flags_horizontal = 4
 __meta__ = {
@@ -58,7 +60,7 @@ __meta__ = {
 
 [node name="ReplayButton" type="Button" parent="MC/VB"]
 margin_left = 424.0
-margin_top = 338.0
+margin_top = 328.0
 margin_right = 552.0
 margin_bottom = 358.0
 rect_min_size = Vector2( 128, 0 )
@@ -66,10 +68,10 @@ size_flags_horizontal = 4
 text = "Replay"
 
 [node name="MenuButton" type="Button" parent="MC/VB"]
-margin_left = 424.0
+margin_left = 412.0
 margin_top = 382.0
-margin_right = 552.0
-margin_bottom = 402.0
+margin_right = 563.0
+margin_bottom = 412.0
 rect_min_size = Vector2( 128, 0 )
 size_flags_horizontal = 4
 text = "Back to Menu"

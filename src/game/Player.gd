@@ -183,8 +183,9 @@ func _input(event) -> void:
 
 	if event.is_action_pressed("attack"):
 		is_attacking = true
-		_is_movement_allowed = false
-		AudioEngine.play_effect(_axe_whoosh_stream)
+		if _is_movement_allowed:
+			_is_movement_allowed = false
+			AudioEngine.play_effect(_axe_whoosh_stream)
 		update_animation()
 	elif event.is_action_released("attack"):
 		is_attacking = false

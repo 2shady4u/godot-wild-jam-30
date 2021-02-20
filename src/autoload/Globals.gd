@@ -93,6 +93,37 @@ const MONKEY_ANIMATIONS_DICT := {
 	},
 }
 
+const YELLOW_BRICK_MONSTER_ANIMATIONS_DICT := {
+	DIMENSION.EMERALD_CITY: {
+		DIRECTION.TOP: {
+			"animation": "idle"
+		},
+		DIRECTION.BOTTOM: {
+			"animation": "idle"
+		},
+		DIRECTION.LEFT: {
+			"animation": "idle"
+		},
+		DIRECTION.RIGHT: {
+			"animation": "idle"
+		}
+	},
+	DIMENSION.WITCH_CASTLE: {
+		DIRECTION.TOP: {
+			"animation": "up"
+		},
+		DIRECTION.BOTTOM: {
+			"animation": "down"
+		},
+		DIRECTION.LEFT: {
+			"animation": "left"
+		},
+		DIRECTION.RIGHT: {
+			"animation": "right"
+		}
+	}
+}
+
 const MONKEY_ATTACK_ANIMATIONS_DICT := {
 	DIRECTION.TOP: {
 		"animation": "attack_up",

@@ -1,5 +1,5 @@
 tool
-class_name Enemy
+class_name Monkey
 extends KinematicBody2D
 
 onready var _animated_sprite := $AnimatedSprite
@@ -27,6 +27,8 @@ signal nav_path_requested
 
 func _ready():
 	if not Engine.editor_hint:
+		add_to_group("enemies")
+
 		var _error : int = _animated_sprite.connect("animation_finished", self, "_on_animation_finished")
 		set_physics_process(false)
 	else:

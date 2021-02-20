@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/game/UI/OverlayUI.gd" type="Script" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://resources/heart_atlastexture.tres" type="Texture" id=2]
 [ext_resource path="res://src/game/UI/game_overlay/HealthRect.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/game/UI/game_overlay/ItemHBox.tscn" type="PackedScene" id=4]
 
@@ -32,95 +32,72 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Control" type="Control" parent="HB"]
-margin_left = 96.0
-margin_right = 928.0
-margin_bottom = 576.0
-size_flags_horizontal = 3
-
-[node name="MC" type="MarginContainer" parent="HB/Control"]
+[node name="MC" type="MarginContainer" parent="HB/Left"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_constants/margin_right = 8
-custom_constants/margin_top = 8
-custom_constants/margin_left = 8
-custom_constants/margin_bottom = 8
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HB" type="HBoxContainer" parent="HB/Control/MC"]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 824.0
-margin_bottom = 56.0
-size_flags_vertical = 0
-custom_constants/separation = 16
-
-[node name="HeartRect" type="TextureRect" parent="HB/Control/MC/HB"]
-margin_right = 48.0
-margin_bottom = 48.0
-rect_min_size = Vector2( 48, 48 )
-texture = ExtResource( 2 )
-expand = true
-stretch_mode = 6
-
-[node name="HealthHBox" type="HBoxContainer" parent="HB/Control/MC/HB"]
-margin_left = 64.0
-margin_right = 168.0
-margin_bottom = 48.0
-
-[node name="HealthRect" parent="HB/Control/MC/HB/HealthHBox" instance=ExtResource( 3 )]
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 0.0
-margin_top = 8.0
-margin_right = 32.0
-margin_bottom = 40.0
-
-[node name="HealthRect2" parent="HB/Control/MC/HB/HealthHBox" instance=ExtResource( 3 )]
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 36.0
-margin_top = 8.0
-margin_right = 68.0
-margin_bottom = 40.0
-
-[node name="HealthRect3" parent="HB/Control/MC/HB/HealthHBox" instance=ExtResource( 3 )]
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 72.0
-margin_top = 8.0
-margin_right = 104.0
-margin_bottom = 40.0
-
-[node name="InventoryMC" type="MarginContainer" parent="HB/Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_constants/margin_right = 16
 custom_constants/margin_top = 16
-custom_constants/margin_left = 16
 custom_constants/margin_bottom = 16
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VB" type="VBoxContainer" parent="HB/Control/InventoryMC"]
-margin_left = 733.0
+[node name="VB" type="VBoxContainer" parent="HB/Left/MC"]
 margin_top = 16.0
-margin_right = 816.0
-margin_bottom = 560.0
-size_flags_horizontal = 8
+margin_right = 96.0
+margin_bottom = 116.0
+rect_min_size = Vector2( 96, 0 )
+size_flags_vertical = 0
 
-[node name="ItemHBox" parent="HB/Control/InventoryMC/VB" instance=ExtResource( 4 )]
-margin_right = 83.0
-alignment = 2
+[node name="HeartRect" type="TextureRect" parent="HB/Left/MC/VB"]
+margin_right = 96.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 6
+
+[node name="HealthHBox" type="HBoxContainer" parent="HB/Left/MC/VB"]
+margin_top = 68.0
+margin_right = 96.0
+margin_bottom = 100.0
+custom_constants/separation = -6
+alignment = 1
+
+[node name="HealthRect" parent="HB/Left/MC/VB/HealthHBox" instance=ExtResource( 3 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 6.0
+margin_top = 0.0
+margin_right = 38.0
+margin_bottom = 32.0
+
+[node name="HealthRect2" parent="HB/Left/MC/VB/HealthHBox" instance=ExtResource( 3 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 32.0
+margin_top = 0.0
+margin_right = 64.0
+margin_bottom = 32.0
+
+[node name="HealthRect3" parent="HB/Left/MC/VB/HealthHBox" instance=ExtResource( 3 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 58.0
+margin_top = 0.0
+margin_right = 90.0
+margin_bottom = 32.0
+
+[node name="Control" type="Control" parent="HB"]
+margin_left = 96.0
+margin_right = 928.0
+margin_bottom = 576.0
+size_flags_horizontal = 3
 
 [node name="Right" type="ColorRect" parent="HB"]
 margin_left = 928.0
@@ -132,3 +109,33 @@ color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="InventoryMC" type="MarginContainer" parent="HB/Right"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_top = 16
+custom_constants/margin_bottom = 16
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VB" type="VBoxContainer" parent="HB/Right/InventoryMC"]
+margin_top = 16.0
+margin_right = 96.0
+margin_bottom = 112.0
+rect_min_size = Vector2( 0, 96 )
+size_flags_vertical = 0
+custom_constants/separation = 16
+alignment = 1
+
+[node name="ItemHBox" parent="HB/Right/InventoryMC/VB" instance=ExtResource( 4 )]
+margin_top = 8.0
+margin_right = 96.0
+margin_bottom = 40.0
+alignment = 1
+
+[node name="ItemHBox2" parent="HB/Right/InventoryMC/VB" instance=ExtResource( 4 )]
+margin_top = 56.0
+margin_right = 96.0
+margin_bottom = 88.0
+alignment = 1

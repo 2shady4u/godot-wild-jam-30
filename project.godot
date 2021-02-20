@@ -14,11 +14,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/game/Door.gd"
 }, {
-"base": "KinematicBody2D",
-"class": "Enemy",
-"language": "GDScript",
-"path": "res://src/game/Monkey.gd"
-}, {
 "base": "Node",
 "class": "GLOBALS",
 "language": "GDScript",
@@ -33,6 +28,11 @@ _global_script_classes=[ {
 "class": "MenuTab",
 "language": "GDScript",
 "path": "res://src/menu/MenuTab.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Monkey",
+"language": "GDScript",
+"path": "res://src/game/Monkey.gd"
 }, {
 "base": "Control",
 "class": "PauseTab",
@@ -63,19 +63,25 @@ _global_script_classes=[ {
 "class": "Room",
 "language": "GDScript",
 "path": "res://src/game/Room.gd"
+}, {
+"base": "StaticBody2D",
+"class": "YellowBrickMonster",
+"language": "GDScript",
+"path": "res://src/game/YellowBrickMonster.gd"
 } ]
 _global_script_class_icons={
 "Door": "",
-"Enemy": "",
 "GLOBALS": "",
 "Lever": "",
 "MenuTab": "",
+"Monkey": "",
 "PauseTab": "",
 "Pickup": "",
 "Player": "",
 "PressurePlate": "",
 "PushableObject": "",
-"Room": ""
+"Room": "",
+"YellowBrickMonster": ""
 }
 
 [application]

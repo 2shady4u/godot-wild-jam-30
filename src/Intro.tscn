@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/Intro.gd" type="Script" id=1]
 [ext_resource path="res://audio/story/intro.ogg" type="AudioStream" id=2]
+[ext_resource path="res://resources/ui_theme.tres" type="Theme" id=3]
 
 [node name="Intro" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 3 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -25,9 +27,9 @@ custom_constants/separation = 24
 alignment = 1
 
 [node name="Label" type="Label" parent="MC/VB"]
-margin_top = 99.0
+margin_top = 89.0
 margin_right = 1024.0
-margin_bottom = 351.0
+margin_bottom = 341.0
 text = "You cursed Tin man are you there?
 Such insolence barging into my lair!
 My castle is not for you to hide.
@@ -51,9 +53,9 @@ __meta__ = {
 
 [node name="ProgressBar" type="ProgressBar" parent="MC/VB"]
 margin_left = 384.0
-margin_top = 375.0
+margin_top = 365.0
 margin_right = 640.0
-margin_bottom = 389.0
+margin_bottom = 379.0
 rect_min_size = Vector2( 256, 0 )
 size_flags_horizontal = 4
 __meta__ = {
@@ -62,7 +64,7 @@ __meta__ = {
 
 [node name="ReplayButton" type="Button" parent="MC/VB"]
 margin_left = 448.0
-margin_top = 413.0
+margin_top = 403.0
 margin_right = 576.0
 margin_bottom = 433.0
 rect_min_size = Vector2( 128, 0 )
@@ -73,7 +75,7 @@ text = "Replay"
 margin_left = 448.0
 margin_top = 457.0
 margin_right = 576.0
-margin_bottom = 477.0
+margin_bottom = 487.0
 rect_min_size = Vector2( 128, 0 )
 size_flags_horizontal = 4
 text = "Start"
