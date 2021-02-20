@@ -214,14 +214,14 @@ func _on_witch_threw_bottles():
 		bottle_instance.connect("shatter", self, "_on_bottle_shatter", [bottle_instance])
 		target_instance.position = random_coordinate
 		bottle_to_target_mapping[bottle_instance] = target_instance
-		
+
 func _on_bottle_shatter(bottle):
 	var target = bottle_to_target_mapping[bottle]
 	target.shatter()
 	if target.is_player_inside():
 		print("Player is inside!")
 		State.decrease_player_health()
-	
+
 
 # BINDINGS FOR ROOM COMPLETION!
 # Probably also add the witch attacks here!

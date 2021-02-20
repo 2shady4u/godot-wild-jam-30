@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/game/UI/pause/SettingsPauseTab.gd" type="Script" id=1]
+[ext_resource path="res://resources/ui_theme.tres" type="Theme" id=2]
 [ext_resource path="res://src/game/UI/base/VolumeVBox.tscn" type="PackedScene" id=3]
 
 [node name="SettingsPauseTab" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 2 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
@@ -32,31 +34,32 @@ custom_constants/separation = 24
 alignment = 1
 
 [node name="VB" type="VBoxContainer" parent="MC/VB"]
-margin_top = 202.0
+margin_top = 190.0
 margin_right = 976.0
-margin_bottom = 282.0
+margin_bottom = 279.0
 custom_constants/separation = 16
 
 [node name="MasterVBox" parent="MC/VB/VB" instance=ExtResource( 3 )]
 margin_right = 976.0
+margin_bottom = 19.0
 
 [node name="MusicVBox" parent="MC/VB/VB" instance=ExtResource( 3 )]
-margin_top = 32.0
+margin_top = 35.0
 margin_right = 976.0
-margin_bottom = 48.0
+margin_bottom = 54.0
 audio_bus = 1
 
 [node name="SFXVBox" parent="MC/VB/VB" instance=ExtResource( 3 )]
-margin_top = 64.0
+margin_top = 70.0
 margin_right = 976.0
-margin_bottom = 80.0
+margin_bottom = 89.0
 audio_bus = 2
 
 [node name="BackButton" type="Button" parent="MC/VB"]
 margin_left = 424.0
-margin_top = 306.0
+margin_top = 303.0
 margin_right = 552.0
-margin_bottom = 326.0
+margin_bottom = 338.0
 rect_min_size = Vector2( 128, 0 )
 size_flags_horizontal = 4
 text = "Back"

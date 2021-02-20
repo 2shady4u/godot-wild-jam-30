@@ -22,7 +22,7 @@ func _ready():
 		set_physics_process(false)
 	else:
 		set_physics_process(false)
-		
+
 	$Timer.connect("timeout", self, "_on_timer_timeout")
 
 func update_animation() -> void:
@@ -36,7 +36,7 @@ func _input(event):
 	# debug
 	if Input.is_action_just_pressed("attack"):
 		start()
-		
+
 
 func _on_timer_timeout():
 	throw()
