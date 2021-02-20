@@ -65,6 +65,11 @@ _global_script_classes=[ {
 "path": "res://src/game/Room.gd"
 }, {
 "base": "StaticBody2D",
+"class": "Witch",
+"language": "GDScript",
+"path": "res://src/game/Witch.gd"
+}, {
+"base": "StaticBody2D",
 "class": "YellowBrickMonster",
 "language": "GDScript",
 "path": "res://src/game/YellowBrickMonster.gd"
@@ -81,6 +86,7 @@ _global_script_class_icons={
 "PressurePlate": "",
 "PushableObject": "",
 "Room": "",
+"Witch": "",
 "YellowBrickMonster": ""
 }
 

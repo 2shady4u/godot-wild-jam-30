@@ -28,9 +28,9 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 13 ), ExtResource( 15 ), ExtResource( 19 ), ExtResource( 12 ) ],
+"frames": [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 3 ), ExtResource( 9 ) ],
 "loop": true,
-"name": "attack_down",
+"name": "attack_up",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 18 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 7 ) ],
@@ -38,19 +38,19 @@ animations = [ {
 "name": "walk_down",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 3 ), ExtResource( 9 ) ],
+"frames": [ ExtResource( 16 ), ExtResource( 20 ), ExtResource( 17 ), ExtResource( 14 ) ],
 "loop": true,
-"name": "attack_up",
+"name": "attack_right",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 13 ), ExtResource( 15 ), ExtResource( 19 ), ExtResource( 12 ) ],
+"loop": true,
+"name": "attack_down",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 6 ), ExtResource( 8 ) ],
 "loop": true,
 "name": "walk_right",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 16 ), ExtResource( 20 ), ExtResource( 17 ), ExtResource( 14 ) ],
-"loop": true,
-"name": "attack_right",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 24 ), ExtResource( 25 ), ExtResource( 23 ), ExtResource( 22 ) ],
@@ -61,15 +61,17 @@ animations = [ {
 
 [sub_resource type="RectangleShape2D" id=2]
 
-[sub_resource type="CircleShape2D" id=3]
-radius = 48.0
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 44.2478
+height = 44.8828
 
 [node name="Monkey" type="KinematicBody2D"]
 script = ExtResource( 21 )
 direction = 0
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-scale = Vector2( 0.5, 0.5 )
+position = Vector2( 0, 11.6541 )
+scale = Vector2( 0.7, 0.7 )
 frames = SubResource( 1 )
 animation = "walk_up"
 frame = 2
@@ -82,4 +84,5 @@ shape = SubResource( 2 )
 [node name="AttackArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2( 0, -30.4596 )
 shape = SubResource( 3 )
