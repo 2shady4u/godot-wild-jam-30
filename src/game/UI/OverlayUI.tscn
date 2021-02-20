@@ -1,13 +1,15 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/game/UI/OverlayUI.gd" type="Script" id=1]
 [ext_resource path="res://resources/heart_atlastexture.tres" type="Texture" id=2]
 [ext_resource path="res://src/game/UI/game_overlay/HealthRect.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/game/UI/game_overlay/ItemHBox.tscn" type="PackedScene" id=4]
+[ext_resource path="res://resources/ui_theme.tres" type="Theme" id=5]
 
 [node name="OverlayUI" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 5 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true,
@@ -44,57 +46,54 @@ __meta__ = {
 [node name="VB" type="VBoxContainer" parent="HB/Left/MC"]
 margin_top = 16.0
 margin_right = 96.0
-margin_bottom = 116.0
+margin_bottom = 268.0
 rect_min_size = Vector2( 96, 0 )
 size_flags_vertical = 0
 
 [node name="HeartRect" type="TextureRect" parent="HB/Left/MC/VB"]
 margin_right = 96.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
+margin_bottom = 96.0
+rect_min_size = Vector2( 96, 96 )
 texture = ExtResource( 2 )
 expand = true
 stretch_mode = 6
 
-[node name="HealthHBox" type="GridContainer" parent="HB/Left/MC/VB"]
-margin_left = 6.0
-margin_top = 68.0
-margin_right = 90.0
-margin_bottom = 100.0
+[node name="HealthHBox" type="VBoxContainer" parent="HB/Left/MC/VB"]
+margin_left = 24.0
+margin_top = 100.0
+margin_right = 72.0
+margin_bottom = 252.0
 size_flags_horizontal = 4
-custom_constants/vseparation = -6
-custom_constants/hseparation = -6
-columns = 3
 
 [node name="HealthRect" parent="HB/Left/MC/VB/HealthHBox" instance=ExtResource( 3 )]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 0.0
-margin_top = 0.0
-margin_right = 32.0
-margin_bottom = 32.0
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 47.0
+margin_bottom = 47.0
 
 [node name="HealthRect2" parent="HB/Left/MC/VB/HealthHBox" instance=ExtResource( 3 )]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 26.0
-margin_top = 0.0
-margin_right = 58.0
-margin_bottom = 32.0
+margin_left = -1.0
+margin_top = 51.0
+margin_right = 47.0
+margin_bottom = 99.0
 
 [node name="HealthRect3" parent="HB/Left/MC/VB/HealthHBox" instance=ExtResource( 3 )]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 52.0
-margin_top = 0.0
-margin_right = 84.0
-margin_bottom = 32.0
+margin_left = -1.0
+margin_top = 103.0
+margin_right = 47.0
+margin_bottom = 151.0
 
 [node name="Control" type="Control" parent="HB"]
 margin_left = 96.0
@@ -125,20 +124,19 @@ __meta__ = {
 [node name="VB" type="VBoxContainer" parent="HB/Right/InventoryMC"]
 margin_top = 16.0
 margin_right = 96.0
-margin_bottom = 112.0
+margin_bottom = 128.0
 rect_min_size = Vector2( 0, 96 )
 size_flags_vertical = 0
 custom_constants/separation = 16
 alignment = 1
 
 [node name="ItemHBox" parent="HB/Right/InventoryMC/VB" instance=ExtResource( 4 )]
-margin_top = 8.0
 margin_right = 96.0
-margin_bottom = 40.0
+margin_bottom = 48.0
 alignment = 1
 
 [node name="ItemHBox2" parent="HB/Right/InventoryMC/VB" instance=ExtResource( 4 )]
-margin_top = 56.0
+margin_top = 64.0
 margin_right = 96.0
-margin_bottom = 88.0
+margin_bottom = 112.0
 alignment = 1

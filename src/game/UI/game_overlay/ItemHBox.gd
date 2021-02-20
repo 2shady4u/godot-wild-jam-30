@@ -17,7 +17,7 @@ func _ready():
 	update_item_hbox()
 
 func update_item_hbox():
-	$AmountLabel.text = str(amount)
+	$AmountLabel.text = ": " + str(amount)
 
 	var item_settings : Dictionary = GLOBALS.ITEMS_DICT.get(type, {})
 

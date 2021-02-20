@@ -45,6 +45,6 @@ func increase_item_amount(item_type : int):
 	inventory[item_type] += 1
 	emit_signal("item_amount_changed")
 
-func decrease_item_amount(item_type : String):
+func decrease_item_amount(item_type : int):
 	inventory[item_type] -= 1
 	emit_signal("item_amount_changed")
