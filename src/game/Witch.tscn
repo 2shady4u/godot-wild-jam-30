@@ -154,11 +154,12 @@ tracks/8/keys = {
 script = ExtResource( 1 )
 attack_timer_timeout = 4.0
 
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 1 )
 animation = "idle"
-frame = 3
 playing = true
 offset = Vector2( 0, -48 )
 

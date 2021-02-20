@@ -3,11 +3,10 @@ class_name Room
 extends YSort
 
 const SCENE_PICKUP := preload("res://src/game/Pickup.tscn")
+const SCENE_BOTTLE := preload("res://src/game/Bottle.tscn")
+const SCENE_TARGET := preload("res://src/game/Target.tscn")
 
-const BOTTLE = preload("res://src/game/Bottle.tscn")
-const TARGET = preload("res://src/game/Target.tscn")
-
-var bottle_to_target_mapping = {}
+var bottle_to_target_mapping := {}
 
 export(GLOBALS.DIMENSION) var dimension : int setget set_dimension
 func set_dimension(value : int) -> void:
@@ -35,7 +34,8 @@ onready var _interact_area := $InteractArea
 onready var _navigation_2d := $Navigation2D
 
 var _initial_room_layout := {
-	"levers": []
+	"levers": {},
+	"enemies": {}
 }
 var _is_room_completed := false
 var _room_completed_stream := preload("res://audio/sfx/room_complete.ogg")
@@ -73,6 +73,10 @@ func _on_body_entered(body : PhysicsBody2D) -> void:
 	if body is Player:
 		print("player entered me!")
 		emit_signal("player_entered_room")
+
+func _on_body_exited(body : PhysicsBody2D) -> void:
+	if body is Player:
+		print("player exited me!")
 
 func _on_dimension_changed() -> void:
 	dimension = State.dimension
@@ -204,25 +208,24 @@ func _on_room_completed(rewards : Array):
 func _on_witch_threw_bottles():
 	for _i in range(20):
 		var random_coordinate = Vector2((randf() - 0.5) * 11 * 64, (randf() - 0.5) * 7 * 64)
-		var bottle_instance = BOTTLE.instance()
-		_enemies.add_child(bottle_instance)
-		var target_instance = TARGET.instance()
+		var bottle := SCENE_BOTTLE.instance()
+		_enemies.add_child(bottle)
+		var target := SCENE_TARGET.instance()
 		# TODO might be nice to find a better group node for these
-		_pressure_plates.add_child(target_instance)
+		_pressure_plates.add_child(target)
 		var distance = 900 + randf() * 200
-		bottle_instance.position = random_coordinate + Vector2(0, -distance)
-		bottle_instance.set_distance(distance)
-		bottle_instance.connect("shatter", self, "_on_bottle_shatter", [bottle_instance])
-		target_instance.position = random_coordinate
-		bottle_to_target_mapping[bottle_instance] = target_instance
+		bottle.position = random_coordinate + Vector2(0, - distance)
+		bottle.set_distance(distance)
+		bottle.connect("shattered", self, "_on_bottle_shattered", [bottle])
+		target.position = random_coordinate
+		bottle_to_target_mapping[bottle] = target
 
-func _on_bottle_shatter(bottle):
+func _on_bottle_shattered(bottle : Bottle) -> void:
 	var target = bottle_to_target_mapping[bottle]
 	target.shatter()
 	if target.is_player_inside():
 		print("Player is inside!")
 		State.decrease_player_health()
-
 
 # BINDINGS FOR ROOM COMPLETION!
 # Probably also add the witch attacks here!

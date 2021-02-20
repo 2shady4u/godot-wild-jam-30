@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Sprite",
+"class": "Bottle",
+"language": "GDScript",
+"path": "res://src/game/Bottle.gd"
+}, {
 "base": "StaticBody2D",
 "class": "Door",
 "language": "GDScript",
@@ -64,6 +69,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/game/Room.gd"
 }, {
+"base": "Area2D",
+"class": "Target",
+"language": "GDScript",
+"path": "res://src/game/Target.gd"
+}, {
 "base": "StaticBody2D",
 "class": "Witch",
 "language": "GDScript",
@@ -75,6 +85,7 @@ _global_script_classes=[ {
 "path": "res://src/game/YellowBrickMonster.gd"
 } ]
 _global_script_class_icons={
+"Bottle": "",
 "Door": "",
 "GLOBALS": "",
 "Lever": "",
@@ -86,6 +97,7 @@ _global_script_class_icons={
 "PressurePlate": "",
 "PushableObject": "",
 "Room": "",
+"Target": "",
 "Witch": "",
 "YellowBrickMonster": ""
 }

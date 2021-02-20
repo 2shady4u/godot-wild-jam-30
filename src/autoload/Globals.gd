@@ -275,6 +275,9 @@ const ROOMS_DICT := {
 			"args": [PICKUP_TYPE.KEY]
 		}]
 	},
+	"first_void": {
+		"conditions": ["all_levers_on", "all_pressure_plates_down"],
+	},
 	"first_battle": {
 		"rewards": [{
 			"action": "spawn_pickup",

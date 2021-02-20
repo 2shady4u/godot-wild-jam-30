@@ -8,7 +8,7 @@ func set_active(value : bool) -> void:
 
 func update_health_rect() -> void:
 	if active:
-		modulate = Color.white
+		texture = preload("res://graphics/UI/health_module.png")
 	else:
-		modulate = Color.black
+		texture = preload("res://graphics/UI/health_module_empty.png")
 
