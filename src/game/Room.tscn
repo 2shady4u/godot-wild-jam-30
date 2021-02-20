@@ -65,10 +65,16 @@ vertices = PoolVector2Array( -320, -32, -320, -192, -32, -192, 32, 192, -32, 192
 polygons = [ PoolIntArray( 0, 1, 2, 3, 4 ), PoolIntArray( 2, 5, 6, 7 ), PoolIntArray( 7, 8, 9 ), PoolIntArray( 9, 10, 11, 12 ), PoolIntArray( 7, 12, 13, 3, 2 ), PoolIntArray( 3, 14, 15, 4 ), PoolIntArray( 4, 16, 17 ), PoolIntArray( 17, 18, 19, 0 ), PoolIntArray( 7, 9, 12 ), PoolIntArray( 0, 4, 17 ) ]
 outlines = [ PoolVector2Array( -320, -192, -32, -192, -32, -224, 32, -224, 32, -192, 320, -192, 320, -32, 352, -32, 352, 32, 320, 32, 320, 192, 32, 192, 32, 224, -32, 224, -32, 192, -320, 192, -320, 32, -352, 32, -352, -32, -320, -32 ) ]
 
-[node name="Room" type="Area2D"]
+[node name="Room" type="YSort"]
 script = ExtResource( 1 )
 
-[node name="HeartOn" type="TileMap" parent="."]
+[node name="EmeraldCity" type="Node2D" parent="."]
+z_index = -1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="TileMap" type="TileMap" parent="EmeraldCity"]
 position = Vector2( -32, 32 )
 scale = Vector2( 0.5, 0.5 )
 tile_set = ExtResource( 2 )
@@ -84,18 +90,27 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Obstacles" type="TileMap" parent="HeartOn"]
+[node name="Obstacles" type="TileMap" parent="EmeraldCity"]
+position = Vector2( -32, 32 )
+scale = Vector2( 0.5, 0.5 )
 tile_set = SubResource( 2 )
 cell_size = Vector2( 128, 128 )
 cell_custom_transform = Transform2D( 128, 0, 0, 128, 0, 0 )
-cell_y_sort = true
 collision_layer = 2
 collision_mask = 2147483650
 format = 1
 tile_data = PoolIntArray( -262141, 0, 0, -196605, 0, 0, -131068, 0, 0, -65532, 0, 0, 4, 0, 0, 65541, 0, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="HeartOff" type="TileMap" parent="."]
-visible = false
+[node name="WitchCastle" type="Node2D" parent="."]
+z_index = -1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="TileMap" type="TileMap" parent="WitchCastle"]
 position = Vector2( -32, 32 )
 scale = Vector2( 0.5, 0.5 )
 tile_set = ExtResource( 3 )
@@ -111,7 +126,9 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Obstacles" type="TileMap" parent="HeartOff"]
+[node name="Obstacles" type="TileMap" parent="WitchCastle"]
+position = Vector2( -32, 32 )
+scale = Vector2( 0.5, 0.5 )
 tile_set = SubResource( 4 )
 cell_size = Vector2( 128, 128 )
 cell_custom_transform = Transform2D( 128, 0, 0, 128, 0, 0 )
@@ -119,6 +136,9 @@ collision_layer = 4
 collision_mask = 4
 format = 1
 tile_data = PoolIntArray( -196611, 0, 0, -131076, 0, 0, -196606, 0, 0, -65540, 0, 0, -4, 0, 0, 65532, 0, 0, 131067, 0, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Doors" type="Node2D" parent="."]
 __meta__ = {
@@ -150,7 +170,9 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="InteractArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
 shape = SubResource( 5 )
 __meta__ = {
 "_edit_lock_": true

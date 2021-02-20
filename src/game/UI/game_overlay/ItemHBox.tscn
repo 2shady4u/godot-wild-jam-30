@@ -36,7 +36,8 @@ align = 1
 [node name="AmountLabel" type="Label" parent="."]
 margin_left = 59.0
 margin_top = 9.0
-margin_right = 83.0
+margin_right = 95.0
 margin_bottom = 23.0
+rect_min_size = Vector2( 36, 0 )
 text = "122"
-align = 2
+align = 1

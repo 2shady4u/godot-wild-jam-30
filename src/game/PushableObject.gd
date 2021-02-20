@@ -9,7 +9,25 @@ func set_dimension(value : int) -> void:
 		update_pushable_object()
 
 func _ready():
+	if not Engine.editor_hint:
+		pass
+		#var _error : int = connect("body_entered", self, "_on_body_entered")
+
 	update_pushable_object()
+
+#func push(direction : int):
+#	var direction_vector := Vector2.ZERO
+#	match direction:
+#		GLOBALS.DIRECTION.LEFT:
+#			direction_vector = Vector2.LEFT
+#		GLOBALS.DIRECTION.RIGHT:
+#			direction_vector = Vector2.RIGHT
+#		GLOBALS.DIRECTION.TOP:
+#			direction_vector = Vector2.UP
+#		GLOBALS.DIRECTION.BOTTOM:
+#			direction_vector = Vector2.DOWN
+#
+#	move_and_slide(direction_vector*64)
 
 func update_pushable_object():
 	var pushable_objects_dict : Dictionary = GLOBALS.PUSHABLE_OBJECTS_DICT.get(dimension, {})

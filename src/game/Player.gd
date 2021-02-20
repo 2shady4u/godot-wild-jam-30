@@ -3,6 +3,7 @@ class_name Player
 extends KinematicBody2D
 
 onready var _interact_area := $InteractArea
+onready var _attack_area := $AttackArea
 onready var _animated_sprite := $AnimatedSprite
 
 export(GLOBALS.DIRECTION) var direction := GLOBALS.DIRECTION.LEFT setget set_direction
@@ -41,6 +42,7 @@ func _ready():
 		var _error := State.connect("player_health_changed", self, "_on_player_health_changed")
 		_error = _interact_area.connect("area_entered", self, "_on_interact_area_entered")
 		_error = _interact_area.connect("body_entered", self, "_on_interact_body_entered")
+		_error = _attack_area.connect("body_entered", self, "_on_attack_body_entered")
 		_error = _interact_area.connect("body_exited", self, "_on_interact_body_exited")
 		_error = _animated_sprite.connect("animation_finished", self, "_on_animation_finished")
 		_error = _animated_sprite.connect("frame_changed", self, "_on_frame_changed")
@@ -76,6 +78,12 @@ func _on_interact_body_exited(body : PhysicsBody2D) -> void:
 	if body in _overlapping_stack:
 		_overlapping_stack.erase(body)
 		update_overlapping_body()
+
+func _on_attack_body_entered(body : PhysicsBody2D):
+	if body is Monkey:
+		AudioEngine.play_effect(_axe_hit_stream)
+		(body as Monkey).decrease_health()
+		print("monkey!")
 
 func update_overlapping_body():
 	_overlapping_stack.sort_custom(self, "sort_overlapping_stack")
@@ -161,6 +169,7 @@ func update_animation() -> void:
 		$AnimatedSprite.flip_v = animation_settings.get("flip_v", false)
 
 		$AnimatedSprite.offset = animation_settings.get("offset", Vector2.ZERO)
+
 	elif _is_movement_allowed:
 		var animation_settings := GLOBALS.PLAYER_ANIMATIONS_DICT
 		animation_settings = animation_settings.get(is_moving, {})
@@ -171,6 +180,16 @@ func update_animation() -> void:
 		$AnimatedSprite.flip_v = animation_settings.get("flip_v", false)
 
 		$AnimatedSprite.offset = animation_settings.get("offset", Vector2.ZERO)
+
+	match direction:
+		GLOBALS.DIRECTION.LEFT:
+			$AttackArea.rotation_degrees = 90
+		GLOBALS.DIRECTION.RIGHT:
+			$AttackArea.rotation_degrees = -90
+		GLOBALS.DIRECTION.TOP:
+			$AttackArea.rotation_degrees = 180
+		GLOBALS.DIRECTION.BOTTOM:
+			$AttackArea.rotation_degrees = 0
 
 func _input(event) -> void:
 	if event.is_action_pressed("toggle_heart"):
@@ -185,6 +204,7 @@ func _input(event) -> void:
 		is_attacking = true
 		if _is_movement_allowed:
 			_is_movement_allowed = false
+			_attack_area.monitoring = true
 			AudioEngine.play_effect(_axe_whoosh_stream)
 		update_animation()
 	elif event.is_action_released("attack"):
@@ -216,7 +236,12 @@ func _on_frame_changed():
 	if is_attacking:
 		match _animated_sprite.frame:
 			0:
+				print("true")
+				_attack_area.monitoring = true
 				AudioEngine.play_effect(_axe_whoosh_stream)
+			2:
+				print("false")
+				_attack_area.monitoring = false
 
 func update_player():
 	match State.dimension:

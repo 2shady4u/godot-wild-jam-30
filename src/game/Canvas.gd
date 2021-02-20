@@ -4,7 +4,7 @@ onready var _rooms := $Rooms
 onready var _camera_2d := $Camera2D
 onready var _player := $Player
 
-var _witch_castle_stream := preload("res://audio/music/witch_castle_2_bg.ogg")
+var _witch_castle_stream := preload("res://audio/music/witch_castle_3_bg.ogg")
 var _emerald_city_stream := preload("res://audio/music/emerald_city_bg.ogg")
 
 func _ready():

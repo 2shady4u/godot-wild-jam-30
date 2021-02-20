@@ -16,7 +16,12 @@ func set_is_attacking(value : bool) -> void:
 	if is_inside_tree():
 		update_animation()
 
-var health := GLOBALS.MAX_MONKEY_HEALTH
+var health := GLOBALS.MAX_MONKEY_HEALTH setget set_player_health
+func set_player_health(value : int) -> void:
+	health = int(clamp(value, 0, GLOBALS.MAX_MONKEY_HEALTH))
+	if health == 0:
+		emit_signal("defeated")
+
 var nav_path := []
 
 var _is_movement_allowed := true
@@ -30,9 +35,15 @@ func _ready():
 		add_to_group("enemies")
 
 		var _error : int = _animated_sprite.connect("animation_finished", self, "_on_animation_finished")
-		set_physics_process(false)
+		set_physics_process(true)
 	else:
 		set_physics_process(false)
+
+func increase_health():
+	self.health += 1
+
+func decrease_health():
+	self.health -= 1
 
 func _physics_process(delta):
 	emit_signal("nav_path_requested")
@@ -49,7 +60,26 @@ func _physics_process(delta):
 			nav_path.remove(0)
 
 	var normalized_direction := move_direction.normalized()
+	update_state(normalized_direction)
 	var _linear_velocity := move_and_slide(normalized_direction*move_speed)
+
+func update_state(move_direction := Vector2.ZERO) -> void:
+	var abs_direction := move_direction.abs()
+	var old_direction := direction
+
+	if abs_direction.x >= abs_direction.y:
+		if move_direction.x > 0:
+			direction = GLOBALS.DIRECTION.RIGHT
+		elif move_direction.x < 0:
+			direction = GLOBALS.DIRECTION.LEFT
+	elif abs_direction.y > abs_direction.x:
+		if move_direction.y > 0:
+			direction = GLOBALS.DIRECTION.BOTTOM
+		elif move_direction.y < 0:
+			direction = GLOBALS.DIRECTION.TOP
+
+	if old_direction != direction:
+		update_animation()
 
 func update_animation() -> void:
 	if is_attacking:

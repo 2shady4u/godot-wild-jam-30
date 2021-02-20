@@ -1,10 +1,10 @@
 class_name Room
-extends Area2D
+extends YSort
 
 const SCENE_PICKUP := preload("res://src/game/Pickup.tscn")
 
-onready var _heart_on := $HeartOn
-onready var _heart_off := $HeartOff
+onready var _emerald_city := $EmeraldCity
+onready var _witch_castle := $WitchCastle
 
 onready var _pickups := $Pickups
 onready var _doors := $Doors
@@ -13,6 +13,7 @@ onready var _levers := $Levers
 onready var _pressure_plates := $PressurePlates
 onready var _pushable_objects := $PushableObjects
 
+onready var _interact_area := $InteractArea
 onready var _navigation_2d := $Navigation2D
 
 export(String) var id := ""
@@ -24,7 +25,7 @@ var player : Player
 signal player_entered_room
 
 func _ready() -> void:
-	var _error : int = connect("body_entered", self, "_on_body_entered")
+	var _error : int = _interact_area.connect("body_entered", self, "_on_body_entered")
 
 	for child in _pickups.get_children():
 		_error = child.connect("picked_up", self, "_on_pickup_picked_up", [child])
@@ -47,13 +48,13 @@ func _on_body_entered(body : PhysicsBody2D) -> void:
 func _on_dimension_changed() -> void:
 	match State.dimension:
 		GLOBALS.DIMENSION.WITCH_CASTLE:
-			_heart_on.visible = false
-			_heart_off.visible = true
-			active_tilemap = _heart_off
+			_emerald_city.visible = false
+			_witch_castle.visible = true
+			active_tilemap = _witch_castle.get_node("TileMap")
 		GLOBALS.DIMENSION.EMERALD_CITY:
-			_heart_on.visible = true
-			_heart_off.visible = false
-			active_tilemap = _heart_on
+			_emerald_city.visible = true
+			_witch_castle.visible = false
+			active_tilemap = _emerald_city.get_node("TileMap")
 
 	for child in _doors.get_children():
 		(child as Door).dimension = State.dimension
