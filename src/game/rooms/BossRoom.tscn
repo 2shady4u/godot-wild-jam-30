@@ -4,6 +4,7 @@
 [ext_resource path="res://src/game/Witch.tscn" type="PackedScene" id=2]
 
 [node name="BossRoom" instance=ExtResource( 1 )]
+dimension = 0
 
 [node name="EmeraldCity" parent="." index="0"]
 visible = true

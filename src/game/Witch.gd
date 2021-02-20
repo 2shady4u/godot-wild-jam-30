@@ -11,8 +11,8 @@ var yellow_brick_road_present = false
 # warning-ignore:unused_signal
 signal defeated
 signal thrown_bottles
+# warning-ignore:unused_signal
 signal summon
-
 
 func _ready():
 	if not Engine.editor_hint:
@@ -23,7 +23,7 @@ func _ready():
 	else:
 		set_physics_process(false)
 
-	$Timer.connect("timeout", self, "_on_timer_timeout")
+	var _error : int = $Timer.connect("timeout", self, "_on_timer_timeout")
 
 func update_animation() -> void:
 	pass
@@ -32,7 +32,7 @@ func _on_animation_finished():
 	pass
 
 
-func _input(event):
+func _input(_event):
 	# debug
 	if Input.is_action_just_pressed("attack"):
 		start()

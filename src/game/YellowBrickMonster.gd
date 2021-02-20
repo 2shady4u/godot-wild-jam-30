@@ -31,7 +31,7 @@ func _ready():
 	else:
 		set_physics_process(false)
 
-func _physics_process(delta):
+func _physics_process(_delta) -> void:
 	emit_signal("nav_path_requested")
 
 	var move_direction := Vector2.ZERO

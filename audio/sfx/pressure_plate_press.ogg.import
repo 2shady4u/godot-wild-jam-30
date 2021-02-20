@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/pressure_plate_press.ogg-ba2ee80dd048900579c100fe6fe22174.oggstr"
+
+[deps]
+
+source_file="res://audio/sfx/pressure_plate_press.ogg"
+dest_files=[ "res://.import/pressure_plate_press.ogg-ba2ee80dd048900579c100fe6fe22174.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

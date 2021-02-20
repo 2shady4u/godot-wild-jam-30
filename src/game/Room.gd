@@ -59,11 +59,12 @@ func _ready() -> void:
 			_error = child.connect("pressed", self, "_on_pressure_plate_pressed")
 
 		for child in _enemies.get_children():
-			_error = child.connect("nav_path_requested", self, "_on_nav_path_requested", [child])
 			_error = child.connect("defeated", self, "_on_enemy_defeated", [child])
 			if child is Witch:
 				_error = child.connect("thrown_bottles", self, "_on_witch_threw_bottles")
 				_error = child.connect("summon", self, "_on_witch_summon")
+			else:
+				_error = child.connect("nav_path_requested", self, "_on_nav_path_requested", [child])
 
 	else:
 		update_room()
@@ -201,7 +202,7 @@ func _on_room_completed(rewards : Array):
 # WITCH BATTLE
 
 func _on_witch_threw_bottles():
-	for i in range(20):
+	for _i in range(20):
 		var random_coordinate = Vector2((randf() - 0.5) * 11 * 64, (randf() - 0.5) * 7 * 64)
 		var bottle_instance = BOTTLE.instance()
 		_enemies.add_child(bottle_instance)

@@ -14,9 +14,10 @@ func set_pressed(value : bool) -> void:
 	if is_inside_tree():
 		update_pressure_plate()
 
-signal pressed
-
 var _overlapping_stack := []
+var _stream := preload("res://audio/sfx/pressure_plate_press.ogg")
+
+signal pressed
 
 func _ready():
 	if not Engine.editor_hint:
@@ -42,6 +43,7 @@ func update_pressed():
 		self.pressed = false
 	else:
 		self.pressed = true
+		AudioEngine.play_effect(_stream)
 		emit_signal("pressed")
 
 func update_pressure_plate():
