@@ -68,7 +68,7 @@ func _physics_process(delta):
 				nav_path.remove(0)
 
 		if nav_path.size() > 0:
-			var distance := position.distance_to(nav_path.back())
+			var distance := position.distance_to(nav_path[-1])
 			if distance < 36:
 				is_attacking = true
 				if _is_movement_allowed:
