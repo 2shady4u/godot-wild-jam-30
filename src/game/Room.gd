@@ -314,6 +314,7 @@ func _on_bottle_shattered(bottle : Bottle) -> void:
 var bindings := {
 	"spawn_pickup": funcref(self, "spawn_pickup"),
 	"spawn_yellow_brick_tile": funcref(self, "spawn_yellow_brick_tile"),
+	"spawn_enemy": funcref(self, "spawn_enemy"),
 	"game_completed": funcref(self, "game_completed"),
 	"start_tutorial": funcref(State, "start_tutorial")
 }
@@ -326,6 +327,16 @@ func spawn_pickup(args : Array) -> void:
 	var _error := pickup.connect("picked_up", self, "_on_pickup_picked_up", [pickup])
 
 	_pickups.call_deferred("add_child", pickup)
+
+func spawn_enemy(args : Array) -> void:
+	var enemy_position : Vector2 = args[0]
+	var monkey : Monkey = SCENE_MONKEY.instance()
+	monkey.position = enemy_position
+
+	for child in _levers.get_children():
+		(child as Lever).locked = true
+
+	_enemies.call_deferred("add_child", monkey)
 
 func spawn_yellow_brick_tile(args : Array) -> void:
 	var tile_position : Vector2 = args[0]

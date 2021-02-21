@@ -22,4 +22,5 @@ direction = 1
 type = 2
 
 [node name="Lever" parent="Levers" index="0" instance=ExtResource( 3 )]
+position = Vector2( 320, 0 )
 dimension = 0

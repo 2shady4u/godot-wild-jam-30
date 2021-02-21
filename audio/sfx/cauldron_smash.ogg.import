@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/cauldron_smash.ogg-5552ea5e10e058d8a2d30ff00ba13a78.oggstr"
+
+[deps]
+
+source_file="res://audio/sfx/cauldron_smash.ogg"
+dest_files=[ "res://.import/cauldron_smash.ogg-5552ea5e10e058d8a2d30ff00ba13a78.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

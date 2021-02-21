@@ -20,3 +20,6 @@ func update_yellow_brick_tile():
 			$Cracked.texture = preload("res://resources/cracked_3_atlastexture.tres")
 		4:
 			$Cracked.texture = preload("res://resources/cracked_4_atlastexture.tres")
+
+	if cracked_level != 0:
+		AudioEngine.play_effect(preload("res://audio/sfx/tile_crack.ogg"))

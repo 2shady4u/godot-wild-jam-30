@@ -330,11 +330,25 @@ const ROOMS_DICT := {
 	"acquire_boss_key": {
 	},
 	"up_right_boss_key": {
-		"conditions": ["all_levers_on"],
+		"conditions": ["all_enemies_defeated"],
 		"rewards": [{
 			"action": "spawn_pickup",
 			"args": [PICKUP_TYPE.OIL_CAN]
-		}]
+		}],
+		"events": {
+			"all_levers_on": [{
+				"action": "spawn_enemy",
+				"args": [Vector2(-256, 128)]
+			},
+			{
+				"action": "spawn_enemy",
+				"args": [Vector2(-256, 0)]
+			},
+			{
+				"action": "spawn_enemy",
+				"args": [Vector2(-256, -128)]
+			}]
+		}
 	},
 	"right_boss_key": {
 	},

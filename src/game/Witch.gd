@@ -22,6 +22,8 @@ var _cackle_streams := [
 	preload("res://audio/sfx/cackle_3.ogg")
 ]
 
+var _smash_stream := preload("res://audio/sfx/cauldron_smash.ogg")
+
 # warning-ignore:unused_signal
 signal defeated
 signal bottles_thrown
@@ -33,6 +35,8 @@ signal summon
 func _ready():
 	if not Engine.editor_hint:
 		add_to_group("enemies")
+
+		_animated_sprite.play("idle")
 
 		var _error : int = _attack_timer.connect("timeout", self, "_on_timer_timeout")
 		_error = _visibility_enabler.connect("screen_entered", self, "_on_screen_entered")
@@ -61,16 +65,22 @@ func _on_timer_timeout():
 
 func smash():
 	_animated_sprite.play("smash")
+	AudioEngine.play_effect(_smash_stream)
 
 	yield(_animated_sprite, "animation_finished")
+	AudioEngine.play_effect(_smash_stream)
 	emit_signal("smashed")
 	yield(_animated_sprite, "animation_finished")
+	AudioEngine.play_effect(_smash_stream)
 	emit_signal("smashed")
 	yield(_animated_sprite, "animation_finished")
+	AudioEngine.play_effect(_smash_stream)
 	emit_signal("smashed")
 	yield(_animated_sprite, "animation_finished")
+	AudioEngine.play_effect(_smash_stream)
 	emit_signal("smashed")
 	yield(_animated_sprite, "animation_finished")
+	AudioEngine.play_effect(_smash_stream)
 	emit_signal("smashed")
 
 	emit_signal("done_smashing")
