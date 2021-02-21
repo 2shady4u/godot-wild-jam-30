@@ -95,6 +95,16 @@ func _ready() -> void:
 func _on_body_entered(body : PhysicsBody2D) -> void:
 	if body is Player:
 		print("player entered me!")
+
+		var room_settings : Dictionary = GLOBALS.ROOMS_DICT.get(id, {})
+		var on_enter : Array = room_settings.get("on_enter", [])
+		for reward in on_enter:
+			var action : String = reward.get("action", "")
+			if action in bindings:
+				var args : Array = reward.get("args", [])
+				var callback : FuncRef = bindings[action]
+				callback.call_func(args)
+
 		emit_signal("player_entered_room")
 
 func _on_screen_exited() -> void:
@@ -305,6 +315,7 @@ var bindings := {
 	"spawn_pickup": funcref(self, "spawn_pickup"),
 	"spawn_yellow_brick_tile": funcref(self, "spawn_yellow_brick_tile"),
 	"game_completed": funcref(self, "game_completed"),
+	"start_tutorial": funcref(State, "start_tutorial")
 }
 
 func spawn_pickup(args : Array) -> void:

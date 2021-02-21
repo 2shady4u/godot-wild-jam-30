@@ -4,6 +4,7 @@ signal player_health_changed
 signal item_amount_changed
 signal dimension_changed
 signal heart_acquired
+signal tutorial_requested
 
 var player_health := GLOBALS.MAX_PLAYER_HEALTH setget set_player_health
 func set_player_health(value : int) -> void:
@@ -55,3 +56,8 @@ func increase_item_amount(item_type : int):
 func decrease_item_amount(item_type : int):
 	inventory[item_type] -= 1
 	emit_signal("item_amount_changed")
+
+func start_tutorial(args : Array):
+	var type : String = args[0]
+
+	emit_signal("tutorial_requested", type)

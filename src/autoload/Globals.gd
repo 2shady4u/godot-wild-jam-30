@@ -277,9 +277,17 @@ const ROOMS_DICT := {
 		}]
 	},
 	"first_void": {
+		"on_enter": [{
+			"action": "start_tutorial",
+			"args": ["interact"]
+		}],
 		"conditions": ["all_levers_on", "all_pressure_plates_down"],
 	},
 	"first_battle": {
+		"on_enter": [{
+			"action": "start_tutorial",
+			"args": ["attack"]
+		}],
 		"conditions": ["all_enemies_defeated"],
 		"rewards": [{
 			"action": "spawn_pickup",
