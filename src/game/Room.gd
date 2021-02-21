@@ -336,6 +336,9 @@ func spawn_enemy(args : Array) -> void:
 	for child in _levers.get_children():
 		(child as Lever).locked = true
 
+	var _error : int = monkey.connect("defeated", self, "_on_enemy_defeated", [monkey])
+	_error = monkey.connect("nav_path_requested", self, "_on_nav_path_requested", [monkey])
+
 	_enemies.call_deferred("add_child", monkey)
 
 func spawn_yellow_brick_tile(args : Array) -> void:

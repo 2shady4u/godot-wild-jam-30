@@ -330,7 +330,7 @@ const ROOMS_DICT := {
 	"acquire_boss_key": {
 	},
 	"up_right_boss_key": {
-		"conditions": ["all_enemies_defeated"],
+		"conditions": ["all_enemies_defeated", "all_pressure_plates_down", "all_levers_on"],
 		"rewards": [{
 			"action": "spawn_pickup",
 			"args": [PICKUP_TYPE.OIL_CAN]

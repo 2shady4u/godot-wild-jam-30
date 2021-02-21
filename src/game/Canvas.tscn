@@ -63,4 +63,5 @@ dimension = 0
 position = Vector2( 0, -1728 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
+position = Vector2( 0, -1728 )
 direction = 2
