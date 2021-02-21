@@ -41,7 +41,10 @@ type = 2
 
 [node name="PressurePlate" parent="PressurePlates" index="0" instance=ExtResource( 4 )]
 position = Vector2( -128, 0 )
+dimension = 0
+pressed = false
 
 [node name="Lever" parent="Levers" index="0" instance=ExtResource( 3 )]
 position = Vector2( 288, -128 )
 dimension = 0
+active = false

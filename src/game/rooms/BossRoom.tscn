@@ -52,6 +52,8 @@ position = Vector2( 0, -128 )
 
 [node name="Lever" parent="Levers" index="0" instance=ExtResource( 4 )]
 position = Vector2( -320, -192 )
+active = false
 
 [node name="Lever2" parent="Levers" index="1" instance=ExtResource( 4 )]
 position = Vector2( 320, -192 )
+active = false

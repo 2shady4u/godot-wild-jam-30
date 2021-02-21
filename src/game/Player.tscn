@@ -76,14 +76,14 @@ animations = [ {
 "name": "idle_up",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 14 ) ],
-"loop": true,
-"name": "idle_down",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 27 ) ],
 "loop": true,
 "name": "defend_up",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 14 ) ],
+"loop": true,
+"name": "idle_down",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 26 ) ],
