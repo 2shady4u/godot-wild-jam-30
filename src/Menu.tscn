@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/Menu.gd" type="Script" id=1]
 [ext_resource path="res://src/menu/MenuTabContainer.gd" type="Script" id=2]
 [ext_resource path="res://src/menu/MainMenuTab.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/menu/SettingsMenuTab.tscn" type="PackedScene" id=4]
 [ext_resource path="res://resources/ui_theme.tres" type="Theme" id=5]
+[ext_resource path="res://src/menu/MenuBackground.tscn" type="PackedScene" id=6]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -17,6 +18,8 @@ __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
+
+[node name="MenuBackground" parent="." instance=ExtResource( 6 )]
 
 [node name="MenuTabContainer" type="TabContainer" parent="."]
 anchor_right = 1.0

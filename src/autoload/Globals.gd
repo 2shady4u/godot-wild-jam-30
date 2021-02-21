@@ -328,6 +328,17 @@ const ROOMS_DICT := {
 		}
 	},
 	"acquire_boss_key": {
+	},
+	"up_right_boss_key": {
 		"conditions": ["all_levers_on"],
+		"rewards": [{
+			"action": "spawn_pickup",
+			"args": [PICKUP_TYPE.OIL_CAN]
+		}]
+	},
+	"right_boss_key": {
+	},
+	"up_boss_key": {
+		"conditions": ["all_pressure_plates_down"],
 	}
 }
