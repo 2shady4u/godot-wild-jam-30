@@ -36,19 +36,14 @@ animations = [ {
 "name": "attack_up",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ) ],
+"loop": true,
+"name": "attack_down",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 1 ), ExtResource( 4 ), ExtResource( 10 ), ExtResource( 11 ) ],
 "loop": true,
 "name": "walk_right",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 8 ), ExtResource( 3 ) ],
-"loop": true,
-"name": "walk_down",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 28 ) ],
-"loop": true,
-"name": "defend_right",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 9 ) ],
@@ -56,14 +51,19 @@ animations = [ {
 "name": "walk_up",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 8 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "walk_down",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 20 ), ExtResource( 25 ), ExtResource( 23 ) ],
 "loop": true,
 "name": "attack_right",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ) ],
+"frames": [ ExtResource( 28 ) ],
 "loop": true,
-"name": "attack_down",
+"name": "defend_right",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 15 ) ],
@@ -71,14 +71,14 @@ animations = [ {
 "name": "idle_right",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 14 ) ],
-"loop": true,
-"name": "idle_down",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 16 ) ],
 "loop": true,
 "name": "idle_up",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 14 ) ],
+"loop": true,
+"name": "idle_down",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 27 ) ],
@@ -129,8 +129,8 @@ shape = SubResource( 4 )
 disabled = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="AttackArea"]
-polygon = PoolVector2Array( -46, 12, -30, 38, 0, 48, 30, 38, 46, 12, 0, 0 )
+polygon = PoolVector2Array( -69, 18, -45, 57, 0, 72, 45, 57, 69, 18, 0, 0 )
 
 [node name="AttackTimer" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.2
 one_shot = true
