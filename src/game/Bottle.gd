@@ -9,7 +9,7 @@ var _distance := 1000
 signal shattered
 
 func set_distance(distance : int):
-	_distance = position.y + distance
+	_distance = int(position.y) + distance
 
 func _process(delta):
 	position += FALL_SPEED * delta * Vector2(0, 1)

@@ -20,6 +20,8 @@ export(float) var camera_zoom := 1.0
 var active_tilemap : TileMap
 var player : Player
 
+onready var _respawn_point := $RespawnPoint
+
 onready var _emerald_city := $EmeraldCity
 onready var _witch_castle := $WitchCastle
 
@@ -138,8 +140,8 @@ func _on_door_opened(door : Door) -> void:
 	door.queue_free()
 
 func _on_nav_path_requested(enemy : PhysicsBody2D) -> void:
-	var enemy_position := enemy.global_position
-	var player_position := player.global_position
+	var enemy_position := enemy.position
+	var player_position := player.global_position - position
 	var nav_path : PoolVector2Array = _navigation_2d.get_simple_path(enemy_position, player_position)
 	nav_path.remove(0)
 
@@ -216,7 +218,7 @@ func _on_witch_threw_bottles():
 		var distance = 900 + randf() * 200
 		bottle.position = random_coordinate + Vector2(0, - distance)
 		bottle.set_distance(distance)
-		bottle.connect("shattered", self, "_on_bottle_shattered", [bottle])
+		var _error : int = bottle.connect("shattered", self, "_on_bottle_shattered", [bottle])
 		target.position = random_coordinate
 		bottle_to_target_mapping[bottle] = target
 

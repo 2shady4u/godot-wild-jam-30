@@ -279,12 +279,20 @@ const ROOMS_DICT := {
 		"conditions": ["all_levers_on", "all_pressure_plates_down"],
 	},
 	"first_battle": {
+		"conditions": ["all_enemies_defeated"],
 		"rewards": [{
 			"action": "spawn_pickup",
 			"args": [PICKUP_TYPE.KEY]
 		}]
 	},
 	"acquire_heart": {
+		"rewards": [{
+			"action": "spawn_pickup",
+			"args": [PICKUP_TYPE.KEY]
+		}]
+	},
+	"floating_platforms": {
+		"conditions": ["all_levers_on"],
 		"rewards": [{
 			"action": "spawn_pickup",
 			"args": [PICKUP_TYPE.KEY]

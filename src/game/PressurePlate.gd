@@ -41,7 +41,7 @@ func _on_body_exited(body : PhysicsBody2D) -> void:
 func update_pressed():
 	if _overlapping_stack.empty():
 		self.pressed = false
-	else:
+	elif not pressed:
 		self.pressed = true
 		AudioEngine.play_effect(_stream)
 		emit_signal("pressed")

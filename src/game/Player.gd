@@ -66,7 +66,8 @@ func decrease_health(enemy_position : Vector2):
 	State.decrease_player_health()
 
 func respawn():
-	global_position = active_room.global_position
+	var respawn_point : Position2D = active_room._respawn_point
+	global_position = respawn_point.global_position
 	set_physics_process(true)
 	set_process_input(true)
 

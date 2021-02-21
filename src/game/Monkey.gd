@@ -47,7 +47,7 @@ func _ready():
 
 func decrease_health(player_position : Vector2):
 	_is_under_attack = true
-	_attack_direction = player_position - position
+	_attack_direction = player_position - global_position
 	self.health -= 1
 
 func _physics_process(delta):
@@ -135,7 +135,7 @@ func update_animation() -> void:
 
 func _on_attack_body_entered(body : PhysicsBody2D):
 	if body.is_in_group("players"):
-		body.decrease_health(position)
+		body.decrease_health(global_position)
 		print("player!")
 
 func toggle_attack_monitoring():

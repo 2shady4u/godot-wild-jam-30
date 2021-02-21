@@ -33,21 +33,21 @@ custom_constants/separation = 16
 alignment = 1
 
 [node name="Label" type="Label" parent="MC/VB"]
-margin_top = 56.0
+margin_top = 14.0
 margin_right = 976.0
-margin_bottom = 70.0
+margin_bottom = 33.0
 text = "~ DEFEAT ~"
 align = 1
 
 [node name="VB" type="VBoxContainer" parent="MC/VB"]
-margin_top = 86.0
+margin_top = 49.0
 margin_right = 976.0
-margin_bottom = 379.0
+margin_bottom = 412.0
 custom_constants/separation = 24
 
 [node name="Label" type="Label" parent="MC/VB/VB"]
 margin_right = 976.0
-margin_bottom = 201.0
+margin_bottom = 261.0
 text = "Oh my! Thank you for the scrap metal, bolts and nuts!
 Who knew that a tin can was such a klutz?
 
@@ -64,9 +64,9 @@ align = 1
 
 [node name="ProgressBar" type="ProgressBar" parent="MC/VB/VB"]
 margin_left = 360.0
-margin_top = 225.0
+margin_top = 285.0
 margin_right = 616.0
-margin_bottom = 239.0
+margin_bottom = 304.0
 rect_min_size = Vector2( 256, 0 )
 size_flags_horizontal = 4
 __meta__ = {
@@ -74,29 +74,29 @@ __meta__ = {
 }
 
 [node name="ReplayButton" type="Button" parent="MC/VB/VB"]
-margin_left = 424.0
-margin_top = 263.0
-margin_right = 552.0
-margin_bottom = 293.0
+margin_left = 420.0
+margin_top = 328.0
+margin_right = 556.0
+margin_bottom = 363.0
 rect_min_size = Vector2( 128, 0 )
 size_flags_horizontal = 4
 text = "Replay"
 
 [node name="MenuButton" type="Button" parent="MC/VB"]
-margin_left = 424.0
-margin_top = 395.0
-margin_right = 552.0
-margin_bottom = 425.0
-rect_min_size = Vector2( 128, 0 )
+margin_left = 360.0
+margin_top = 428.0
+margin_right = 616.0
+margin_bottom = 463.0
+rect_min_size = Vector2( 256, 0 )
 size_flags_horizontal = 4
 text = "Quit to Menu"
 
 [node name="QuitButton" type="Button" parent="MC/VB"]
-margin_left = 424.0
-margin_top = 441.0
-margin_right = 552.0
-margin_bottom = 471.0
-rect_min_size = Vector2( 128, 0 )
+margin_left = 360.0
+margin_top = 479.0
+margin_right = 616.0
+margin_bottom = 514.0
+rect_min_size = Vector2( 256, 0 )
 size_flags_horizontal = 4
 text = "Quit Game"
 
