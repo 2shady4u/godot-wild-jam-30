@@ -2,7 +2,7 @@ extends Control
 
 onready var _progress_bar := $MC/VB/ProgressBar
 onready var _replay_button := $MC/VB/ReplayButton
-onready var _menu_button := $MC/VB/VB/MenuButton
+onready var _menu_button := $MC/VB/MenuButton
 
 onready var _audio_stream_player := $AudioStreamPlayer
 

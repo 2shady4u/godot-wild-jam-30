@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/game/rooms/FirstBattle.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/game/Canvas.gd" type="Script" id=2]
@@ -8,6 +8,9 @@
 [ext_resource path="res://src/game/rooms/AcquireHeart.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/game/rooms/BossRoom.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/game/rooms/FloatingPlatforms.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/game/rooms/BeforeBossRoom.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/game/rooms/AcquireBossKey.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/game/rooms/AcquireBossKey2.tscn" type="PackedScene" id=11]
 
 [node name="Canvas" type="YSort"]
 script = ExtResource( 2 )
@@ -34,10 +37,19 @@ position = Vector2( -1664, -576 )
 dimension = 0
 
 [node name="BossRoom" parent="Rooms" instance=ExtResource( 7 )]
-position = Vector2( -1664, -1152 )
+position = Vector2( -1664, -1728 )
 
 [node name="FloatingPlatforms" parent="Rooms" instance=ExtResource( 8 )]
 position = Vector2( -2496, 0 )
+
+[node name="BeforeBossRoom" parent="Rooms" instance=ExtResource( 9 )]
+position = Vector2( -1664, -1152 )
+
+[node name="AcquireBossKey" parent="Rooms" instance=ExtResource( 10 )]
+position = Vector2( 0, -1152 )
+
+[node name="AcquireBossKey2" parent="Rooms" instance=ExtResource( 11 )]
+position = Vector2( -832, -1152 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 direction = 2

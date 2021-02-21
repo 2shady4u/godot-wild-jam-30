@@ -14,6 +14,7 @@ const PLAYER_MOVE_SPEED := 200
 
 const MAX_MONKEY_HEALTH := 2
 const MAX_PLAYER_HEALTH := 3
+const MAX_WITCH_HEALTH := 3
 
 const PLAYER_ANIMATIONS_DICT := {
 	false: {
@@ -149,11 +150,11 @@ const MONKEY_ATTACK_ANIMATIONS_DICT := {
 
 const ITEMS_DICT := {
 	ITEM_TYPE.KEY: {
-		"initial_amount": 1,
+		"initial_amount": 0,
 		"texture": preload('res://resources/key_atlastexture.tres'),
 	},
 	ITEM_TYPE.BOSS_KEY: {
-		"initial_amount": 1,
+		"initial_amount": 0,
 		"texture": preload('res://resources/boss_key_atlastexture.tres')
 	}
 }
@@ -297,5 +298,28 @@ const ROOMS_DICT := {
 			"action": "spawn_pickup",
 			"args": [PICKUP_TYPE.KEY]
 		}]
+	},
+	"before_boss_room": {
+		"conditions": ["all_enemies_defeated"],
+		"rewards": [{
+			"action": "spawn_pickup",
+			"args": [PICKUP_TYPE.OIL_CAN]
+		}]
+	},
+	"boss_room": {
+		"conditions": ["all_enemies_defeated"],
+		"rewards": [{
+			"action": "game_completed",
+			"args": []
+		}],
+		"events": {
+			"all_levers_on": [{
+				"action": "spawn_yellow_brick_tile",
+				"args": [Vector2(0, -64)]
+			}]
+		}
+	},
+	"acquire_boss_key": {
+		"conditions": ["all_levers_on"],
 	}
 }

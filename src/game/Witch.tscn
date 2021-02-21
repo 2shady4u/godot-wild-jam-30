@@ -34,10 +34,10 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 32, 32 )
+extents = Vector2( 32, 16 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 38.3959, 36.6681 )
+extents = Vector2( 40, 36 )
 
 [sub_resource type="Animation" id=4]
 resource_name = "bottle_throw"
@@ -78,7 +78,7 @@ tracks/2/keys = {
 "values": [ 178.588, 306.79 ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Bottle2:position")
+tracks/3/path = NodePath("Bottle2:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -86,11 +86,11 @@ tracks/3/enabled = true
 tracks/3/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( -23.7608, -70.019 ), Vector2( 23.2392, -213.519 ) ]
+"update": 1,
+"values": [ true, false ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("Bottle2:rotation_degrees")
+tracks/4/path = NodePath("Bottle2:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -99,10 +99,10 @@ tracks/4/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 178.588, 43.2231 ]
+"values": [ Vector2( -23.7608, -70.019 ), Vector2( 23.2392, -213.519 ) ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("Bottle2:visible")
+tracks/5/path = NodePath("Bottle2:rotation_degrees")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -110,8 +110,8 @@ tracks/5/enabled = true
 tracks/5/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
+"update": 0,
+"values": [ 178.588, 43.2231 ]
 }
 tracks/6/type = "value"
 tracks/6/path = NodePath("Bottle3:visible")
@@ -160,8 +160,9 @@ attack_timer_timeout = 4.0
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 1 )
 animation = "idle"
+frame = 1
 playing = true
-offset = Vector2( 0, -48 )
+offset = Vector2( 0, -100 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
@@ -173,23 +174,28 @@ shape = SubResource( 3 )
 
 [node name="Timer" type="Timer" parent="."]
 
+[node name="Bottles" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="Bottle1" type="Sprite" parent="."]
 visible = false
-position = Vector2( -23.7608, -70.019 )
-rotation = 3.11695
+position = Vector2( -59.3877, -207.932 )
+rotation = 5.3545
 scale = Vector2( 0.231257, 0.231257 )
 texture = ExtResource( 14 )
 
 [node name="Bottle2" type="Sprite" parent="."]
 visible = false
-position = Vector2( -23.7608, -70.019 )
-rotation = 3.11695
+position = Vector2( 23.2392, -213.519 )
+rotation = 0.754385
 scale = Vector2( 0.231257, 0.231257 )
 texture = ExtResource( 14 )
 
 [node name="Bottle3" type="Sprite" parent="."]
 visible = false
-position = Vector2( -23.7608, -70.019 )
+position = Vector2( -96.4391, -213.016 )
 rotation = 3.11695
 scale = Vector2( 0.231257, 0.231257 )
 texture = ExtResource( 14 )

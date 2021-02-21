@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/cackle_1.ogg-fe26d1d136012e682101fc030119bf2e.oggstr"
+
+[deps]
+
+source_file="res://audio/sfx/cackle_1.ogg"
+dest_files=[ "res://.import/cackle_1.ogg-fe26d1d136012e682101fc030119bf2e.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

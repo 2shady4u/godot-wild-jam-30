@@ -68,6 +68,13 @@ outlines = [ PoolVector2Array( -320, -192, -32, -192, -32, -224, 32, -224, 32, -
 [node name="Room" type="YSort"]
 script = ExtResource( 1 )
 
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+visible = false
+rect = Rect2( -200, -200, 400, 400 )
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="RespawnPoint" type="Position2D" parent="."]
 
 [node name="EmeraldCity" type="Node2D" parent="."]
@@ -147,6 +154,12 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="YellowBrickTiles" type="Node2D" parent="."]
+z_index = -1
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="Pickups" type="Node2D" parent="."]
 z_index = -1
 __meta__ = {
@@ -155,6 +168,17 @@ __meta__ = {
 
 [node name="PressurePlates" type="Node2D" parent="."]
 z_index = -1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Targets" type="Node2D" parent="."]
+z_index = -1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Bottles" type="YSort" parent="."]
 __meta__ = {
 "_edit_lock_": true
 }

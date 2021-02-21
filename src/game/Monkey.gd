@@ -18,8 +18,8 @@ func set_is_attacking(value : bool) -> void:
 	if is_inside_tree():
 		update_animation()
 
-var health := GLOBALS.MAX_MONKEY_HEALTH setget set_player_health
-func set_player_health(value : int) -> void:
+var health := GLOBALS.MAX_MONKEY_HEALTH setget set_health
+func set_health(value : int) -> void:
 	health = int(clamp(value, 0, GLOBALS.MAX_MONKEY_HEALTH))
 	if health == 0:
 		emit_signal("defeated")
@@ -44,6 +44,8 @@ func _ready():
 		set_physics_process(true)
 	else:
 		set_physics_process(false)
+
+	update_animation()
 
 func decrease_health(player_position : Vector2):
 	_is_under_attack = true

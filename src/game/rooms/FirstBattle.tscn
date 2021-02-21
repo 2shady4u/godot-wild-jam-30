@@ -31,12 +31,8 @@ type = 3
 
 [node name="Monkey" parent="Enemies" index="0" instance=ExtResource( 3 )]
 position = Vector2( -192, -128 )
-direction = 1
+direction = 3
 
 [node name="Monkey2" parent="Enemies" index="1" instance=ExtResource( 3 )]
-position = Vector2( 0, 128 )
-direction = 0
-
-[node name="Monkey3" parent="Enemies" index="2" instance=ExtResource( 3 )]
-position = Vector2( 192, -128 )
-direction = 1
+position = Vector2( -192, 128 )
+direction = 3

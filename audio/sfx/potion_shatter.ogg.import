@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/potion_shatter.ogg-2803fd8a71f2871ea0b77fc2153fa6ea.oggstr"
+
+[deps]
+
+source_file="res://audio/sfx/potion_shatter.ogg"
+dest_files=[ "res://.import/potion_shatter.ogg-2803fd8a71f2871ea0b77fc2153fa6ea.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

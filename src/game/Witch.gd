@@ -2,48 +2,81 @@ tool
 class_name Witch
 extends StaticBody2D
 
-export var attack_timer_timeout = 8.0
+export(float) var attack_timer_timeout := 8.0
 
+onready var _visibility_enabler := $VisibilityEnabler2D
 onready var _animated_sprite := $AnimatedSprite
+onready var _attack_timer := $Timer
 
-var yellow_brick_road_present = false
+var health := GLOBALS.MAX_WITCH_HEALTH setget set_health
+func set_health(value : int) -> void:
+	health = int(clamp(value, 0, GLOBALS.MAX_WITCH_HEALTH))
+	if health == 0:
+		emit_signal("defeated")
+
+var is_invincible := false
+
+var _cackle_streams := [
+	preload("res://audio/sfx/cackle_1.ogg"),
+	preload("res://audio/sfx/cackle_2.ogg"),
+	preload("res://audio/sfx/cackle_3.ogg")
+]
 
 # warning-ignore:unused_signal
 signal defeated
-signal thrown_bottles
+signal bottles_thrown
+signal smashed
+signal done_smashing
 # warning-ignore:unused_signal
 signal summon
 
 func _ready():
 	if not Engine.editor_hint:
-		add_to_group("witch")
+		add_to_group("enemies")
 
-		var _error : int = _animated_sprite.connect("animation_finished", self, "_on_animation_finished")
-		set_physics_process(false)
-	else:
-		set_physics_process(false)
+		var _error : int = _attack_timer.connect("timeout", self, "_on_timer_timeout")
+		_error = _visibility_enabler.connect("screen_entered", self, "_on_screen_entered")
+		_error = _visibility_enabler.connect("screen_exited", self, "_on_screen_exited")
 
-	var _error : int = $Timer.connect("timeout", self, "_on_timer_timeout")
+	set_physics_process(false)
 
-func update_animation() -> void:
-	pass
+func _on_screen_entered():
+	print("screen entered witch!")
+	_attack_timer.start(attack_timer_timeout)
 
-func _on_animation_finished():
-	pass
+func _on_screen_exited():
+	_attack_timer.stop()
 
+func decrease_health() -> void:
+	is_invincible = true
+	self.health -= 1
+	_attack_timer.stop()
 
-func _input(_event):
-	# debug
-	if Input.is_action_just_pressed("attack"):
-		start()
-
+	smash()
 
 func _on_timer_timeout():
+	print("throwing potions!")
+	AudioEngine.play_effect(_cackle_streams[randi() % _cackle_streams.size()])
 	throw()
 
+func smash():
+	_animated_sprite.play("smash")
 
-func start():
-	$Timer.start(attack_timer_timeout)
+	yield(_animated_sprite, "animation_finished")
+	emit_signal("smashed")
+	yield(_animated_sprite, "animation_finished")
+	emit_signal("smashed")
+	yield(_animated_sprite, "animation_finished")
+	emit_signal("smashed")
+	yield(_animated_sprite, "animation_finished")
+	emit_signal("smashed")
+	yield(_animated_sprite, "animation_finished")
+	emit_signal("smashed")
+
+	emit_signal("done_smashing")
+
+	is_invincible = false
+	_attack_timer.start()
 
 func throw():
 	# sorry for barf Pietsan
@@ -54,4 +87,7 @@ func throw():
 	yield(_animated_sprite, "animation_finished")
 	_animated_sprite.play("idle")
 	yield($AnimationPlayer, "animation_finished")
-	emit_signal("thrown_bottles")
+	emit_signal("bottles_thrown", get_amount_of_bottles())
+
+func get_amount_of_bottles() -> int:
+	return (GLOBALS.MAX_WITCH_HEALTH - health)*20 + 20

@@ -9,7 +9,7 @@
 [node name="FirstVoid" instance=ExtResource( 1 )]
 id = "first_void"
 
-[node name="RespawnPoint" parent="." index="0"]
+[node name="RespawnPoint" parent="." index="1"]
 position = Vector2( -192, 128 )
 
 [node name="TileMap" parent="EmeraldCity" index="0"]
@@ -35,7 +35,7 @@ position = Vector2( 0, 256 )
 direction = 1
 type = 3
 
-[node name="PressurePlates" parent="." index="5"]
+[node name="PressurePlates" parent="." index="6"]
 z_index = -2
 
 [node name="PressurePlate" parent="PressurePlates" index="0" instance=ExtResource( 3 )]

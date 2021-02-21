@@ -27,6 +27,7 @@ func set_is_attacking(value : bool) -> void:
 
 var active_room : Node2D
 
+var _overlapping_yellow_brick_tiles := []
 var _overlapping_stack := []
 var _overlapping_body : PhysicsBody2D
 
@@ -46,10 +47,14 @@ func _ready():
 		_attack_area.monitoring = false
 
 		var _error := State.connect("player_health_changed", self, "_on_player_health_changed")
+
 		_error = _interact_area.connect("area_entered", self, "_on_interact_area_entered")
+		_error = _interact_area.connect("area_exited", self, "_on_interact_area_exited")
 		_error = _interact_area.connect("body_entered", self, "_on_interact_body_entered")
-		_error = _attack_area.connect("body_entered", self, "_on_attack_body_entered")
 		_error = _interact_area.connect("body_exited", self, "_on_interact_body_exited")
+
+		_error = _attack_area.connect("body_entered", self, "_on_attack_body_entered")
+
 		_error = _animated_sprite.connect("animation_finished", self, "_on_animation_finished")
 		_error = _animated_sprite.connect("frame_changed", self, "_on_frame_changed")
 
@@ -65,6 +70,9 @@ func decrease_health(enemy_position : Vector2):
 	_attack_direction = enemy_position - position
 	State.decrease_player_health()
 
+func catapult_to(catapult_position : Vector2) -> void:
+	global_position = catapult_position
+
 func respawn():
 	var respawn_point : Position2D = active_room._respawn_point
 	global_position = respawn_point.global_position
@@ -74,11 +82,19 @@ func respawn():
 func _on_interact_area_entered(area : Area2D) -> void:
 	if area is Pickup:
 		area.pick_up()
+	elif area is YellowBrickTile:
+		if not area in _overlapping_yellow_brick_tiles:
+			_overlapping_yellow_brick_tiles.append(area)
+
+func _on_interact_area_exited(area : Area2D) -> void:
+	if area is YellowBrickTile:
+		if area in _overlapping_yellow_brick_tiles:
+			_overlapping_yellow_brick_tiles.erase(area)
 
 func _on_interact_body_entered(body : PhysicsBody2D) -> void:
 	if body is Door:
 		if not body in _overlapping_stack:
-			if (body as Door).type == GLOBALS.DOOR_TYPE.LOCKED:
+			if (body as Door).type in [GLOBALS.DOOR_TYPE.LOCKED, GLOBALS.DOOR_TYPE.BOSS]:
 				_overlapping_stack.append(body)
 				update_overlapping_body()
 	elif body is Lever:
@@ -96,6 +112,11 @@ func _on_attack_body_entered(body : PhysicsBody2D):
 		AudioEngine.play_effect(_axe_hit_stream)
 		(body as Monkey).decrease_health(position)
 		print("monkey!")
+	elif body is Witch:
+		if not (body as Witch).is_invincible:
+			AudioEngine.play_effect(_axe_hit_stream)
+			(body as Witch).decrease_health()
+			print("witch!")
 
 func update_overlapping_body():
 	_overlapping_stack.sort_custom(self, "sort_overlapping_stack")
@@ -129,7 +150,7 @@ func _physics_process(_delta):
 	if _is_movement_allowed:
 		var _linear_velocity := move_and_slide(normalized_direction*move_speed)
 
-	if active_room:
+	if active_room and _overlapping_yellow_brick_tiles.empty():
 		var tile_index : int = active_room.get_cell(global_position)
 		#print(tile_index)
 		match tile_index:
@@ -225,8 +246,12 @@ func _input(event) -> void:
 	if event.is_action_pressed("interact"):
 		if _overlapping_body != null:
 			if _overlapping_body is Door:
-				if State.get_item_amount(GLOBALS.ITEM_TYPE.KEY) > 0:
+				var type : int = (_overlapping_body as Door).type
+				if type == GLOBALS.DOOR_TYPE.LOCKED and State.get_item_amount(GLOBALS.ITEM_TYPE.KEY) > 0:
 					State.decrease_item_amount(GLOBALS.ITEM_TYPE.KEY)
+					_overlapping_body.open()
+				elif type == GLOBALS.DOOR_TYPE.BOSS and State.get_item_amount(GLOBALS.ITEM_TYPE.BOSS_KEY) > 0:
+					State.decrease_item_amount(GLOBALS.ITEM_TYPE.BOSS_KEY)
 					_overlapping_body.open()
 			elif _overlapping_body is Lever:
 				_overlapping_body.toggle()
